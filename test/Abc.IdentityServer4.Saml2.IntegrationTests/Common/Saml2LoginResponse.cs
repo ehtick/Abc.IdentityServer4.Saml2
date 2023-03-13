@@ -41,17 +41,17 @@ namespace Abc.IdentityServer4.Saml2.IntegrationTests.Common
         private Dictionary<string, string> AnalysePost(string html, out string action)
         {
             action = null;
-            var match = new Regex(@"action=""(?<action>.+?)""").Match(HttpUtility.HtmlDecode(html));
+            var match = new Regex(@"action=""(?<action>.+?)""").Match(html);
             if (match.Success)
             {
-                action = match.Groups["action"].Value;
+                action = HttpUtility.HtmlDecode(match.Groups["action"].Value);
             }
 
             var collection = new Dictionary<string, string>();
-            var mathces = new Regex(@"<input type=""hidden"" name=""(?<name>.+?)"" value=""(?<value>.+?)"" />").Matches(HttpUtility.HtmlDecode(html));
+            var mathces = new Regex(@"<input type=""hidden"" name=""(?<name>.+?)"" value=""(?<value>.+?)"" />").Matches(html);
             foreach (Match m in mathces)
             {
-                collection.Add(m.Groups["name"].Value, m.Groups["value"].Value);
+                collection.Add(m.Groups["name"].Value, HttpUtility.HtmlDecode(m.Groups["value"].Value));
             }
 
             return collection;

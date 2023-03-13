@@ -12,11 +12,7 @@ using Abc.IdentityModel.Protocols.Saml2;
 using Abc.IdentityServer4.Saml2.ResponseProcessing;
 using Abc.IdentityServer4.Saml2.Stores;
 using Abc.IdentityServer4.Saml2.Validation;
-using IdentityServer4;
 using IdentityServer4.Extensions;
-using IdentityServer4.Models;
-using IdentityServer4.Services;
-using IdentityServer4.Stores;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Linq;
@@ -67,7 +63,7 @@ namespace Abc.IdentityServer4.Saml2.Services
                     var clientId = participant.ClientId;
 
                     var client = await _clientStore.FindEnabledClientByIdAsync(clientId);
-                    if (client is null || client.ProtocolType != IdentityServerConstants.ProtocolTypes.Saml2p || !client.FrontChannelLogoutUri.IsPresent())
+                    if (client is null || client.ProtocolType != Ids.IdentityServerConstants.ProtocolTypes.Saml2p || !client.FrontChannelLogoutUri.IsPresent())
                     {
                         continue;
                     }

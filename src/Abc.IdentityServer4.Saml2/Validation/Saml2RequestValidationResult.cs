@@ -7,11 +7,9 @@
 // </copyright>
 // ----------------------------------------------------------------------------
 
-using IdentityServer4.Validation;
-
 namespace Abc.IdentityServer4.Saml2.Validation
 {
-    public class Saml2RequestValidationResult : ValidationResult
+    public class Saml2RequestValidationResult : Ids.Validation.ValidationResult
     {
         public Saml2RequestValidationResult(ValidatedSaml2Request validatedRequest)
         {

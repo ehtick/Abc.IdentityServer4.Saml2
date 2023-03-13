@@ -1,9 +1,4 @@
 ﻿using FluentAssertions;
-using IdentityServer4;
-using IdentityServer4.Configuration;
-using IdentityServer4.Models;
-using IdentityServer4.Services;
-using IdentityServer4.Stores;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Threading.Tasks;
@@ -46,7 +41,7 @@ namespace Abc.IdentityServer4.Saml2.Services.UnitTests
         {
             _mockUserSession.Clients.Add("foo");
             _mockUserSession.SessionId = "session";
-            _mockUserSession.User = new IdentityServerUser("123").CreatePrincipal();
+            _mockUserSession.User = new Ids.IdentityServerUser("123").CreatePrincipal();
 
             var context = await _target.GetLogoutContextAsync(null);
 

@@ -1,19 +1,8 @@
 ﻿using Abc.IdentityModel.Protocols.Saml2;
 using Abc.IdentityServer4.Saml2.Endpoints.UnitTests;
-using Abc.IdentityServer4.Saml2.ResponseProcessing;
-using Abc.IdentityServer4.Saml2.Services;
 using Abc.IdentityServer4.Saml2.Stores;
 using FluentAssertions;
-using IdentityServer4;
-using IdentityServer4.Endpoints.Results;
-using IdentityServer4.Extensions;
-using IdentityServer4.Models;
-using IdentityServer4.Services;
-using IdentityServer4.Stores;
-using Microsoft.AspNetCore.Http;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -48,19 +37,19 @@ namespace Abc.IdentityServer4.Saml2.Services.UnitTests
                 new Client()
                 {
                     ClientId = "urn:client1",
-                    ProtocolType = IdentityServerConstants.ProtocolTypes.Saml2p,
+                    ProtocolType = Ids.IdentityServerConstants.ProtocolTypes.Saml2p,
                     FrontChannelLogoutUri = "https://client2/signout",
                 },
                 new Client()
                 {
                     ClientId = "urn:client2",
-                    ProtocolType = IdentityServerConstants.ProtocolTypes.Saml2p,
+                    ProtocolType = Ids.IdentityServerConstants.ProtocolTypes.Saml2p,
                     FrontChannelLogoutUri = "https://client2/signout",
                 },
                 new Client()
                 {
                     ClientId = "urn:client5",
-                    ProtocolType = IdentityServerConstants.ProtocolTypes.Saml2p,
+                    ProtocolType = Ids.IdentityServerConstants.ProtocolTypes.Saml2p,
                     FrontChannelLogoutUri = "https://client5/signout",
                 },
             };

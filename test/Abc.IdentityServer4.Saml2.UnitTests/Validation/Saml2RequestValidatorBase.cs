@@ -1,11 +1,5 @@
 ﻿using Abc.IdentityServer4.Saml2.Stores;
-using IdentityServer4;
-using IdentityServer4.Configuration;
-using IdentityServer4.Models;
-using IdentityServer4.Stores;
-using IdentityServer4.Validation;
 using Microsoft.AspNetCore.Authentication;
-using MockUserSession = IdentityServer4.Services.MockUserSession;
 
 namespace Abc.IdentityServer4.Saml2.Validation.UnitTests
 {
@@ -30,7 +24,7 @@ namespace Abc.IdentityServer4.Saml2.Validation.UnitTests
                     {
                         ClientId = "urn:test",
                         ClientName = "SAML2 Client",
-                        ProtocolType = IdentityServerConstants.ProtocolTypes.Saml2p,
+                        ProtocolType = Ids.IdentityServerConstants.ProtocolTypes.Saml2p,
                         Enabled = true,
                         RedirectUris = { "https://saml2/callback" },
                         FrontChannelLogoutUri = "https://saml2/signout",

@@ -8,7 +8,6 @@
 // ----------------------------------------------------------------------------
 
 using Abc.IdentityModel.Metadata;
-using IdentityServer4.Hosting;
 using Microsoft.AspNetCore.Http;
 using System.IO;
 using System.Text;

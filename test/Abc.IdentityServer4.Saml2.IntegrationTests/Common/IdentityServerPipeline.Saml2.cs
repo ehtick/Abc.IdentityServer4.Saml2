@@ -118,8 +118,14 @@ namespace Abc.IdentityServer4.Saml2.IntegrationTests.Common
                 { "RelayState", state }
             };
 
+#if DUENDE
+            var parameters = Parameters.FromObject(values);
+#else
+            var parameters = values;
+#endif
+
             var url = new RequestUrl(Saml2SingleSignOnEndpoint);
-            return url.Create(values);
+            return url.Create(parameters);
 
             static string DeflateEncode(string data)
             {

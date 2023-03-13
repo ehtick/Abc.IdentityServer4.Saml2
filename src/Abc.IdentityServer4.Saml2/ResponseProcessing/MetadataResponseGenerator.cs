@@ -9,11 +9,8 @@
 
 using Abc.IdentityModel.Metadata;
 using Abc.IdentityModel.Protocols.Saml2;
-using IdentityServer4;
-using IdentityServer4.Configuration;
 using IdentityServer4.Extensions;
 using IdentityServer4.Services;
-using IdentityServer4.Stores;
 using Microsoft.AspNetCore.Http;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.IdentityModel.Xml;
@@ -104,7 +101,7 @@ namespace Abc.IdentityServer4.Saml2.ResponseProcessing
                 var resources = await _resources.GetAllEnabledResourcesAsync();
 
                 // exclude standard OIDC identity resources
-                var oidcResources = new[] { IdentityServerConstants.StandardScopes.OpenId, IdentityServerConstants.StandardScopes.Profile };
+                var oidcResources = new[] { Ids.IdentityServerConstants.StandardScopes.OpenId, Ids.IdentityServerConstants.StandardScopes.Profile };
                 var claims = resources
                     .IdentityResources.Where(x => x.ShowInDiscoveryDocument && !oidcResources.Contains(x.Name))
                     .SelectMany(x => x.UserClaims)

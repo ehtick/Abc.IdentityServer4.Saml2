@@ -1,7 +1,5 @@
 ﻿using Abc.IdentityModel.Protocols.Saml2;
-using Abc.IdentityServer4.Saml2.Stores;
 using FluentAssertions;
-using IdentityServer4.Stores;
 using System;
 using System.Threading.Tasks;
 using Xunit;

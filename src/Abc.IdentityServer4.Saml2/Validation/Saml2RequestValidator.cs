@@ -10,12 +10,7 @@
 using Abc.IdentityModel.Protocols.Saml2;
 using Abc.IdentityServer4.Extensions;
 using Abc.IdentityServer4.Saml2.Stores;
-using IdentityServer4;
-using IdentityServer4.Configuration;
 using IdentityServer4.Extensions;
-using IdentityServer4.Services;
-using IdentityServer4.Stores;
-using IdentityServer4.Validation;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.Extensions.Logging;
 using System.Linq;
@@ -30,7 +25,7 @@ namespace Abc.IdentityServer4.Saml2.Validation
         private readonly ILogger _logger;
         private readonly IClientStore _clients;
         private readonly IUserSession _userSession;
-        private readonly IRedirectUriValidator _uriValidator;
+        private readonly Ids.Validation.IRedirectUriValidator _uriValidator;
         private readonly IdentityServerOptions _options;
         private readonly ISystemClock _clock;
         private readonly IRelyingPartyStore _relyingParties;
@@ -39,7 +34,7 @@ namespace Abc.IdentityServer4.Saml2.Validation
             ILogger<Saml2RequestValidator> logger,
             IClientStore clients,
             IUserSession userSession,
-            IRedirectUriValidator uriValidator,
+            Ids.Validation.IRedirectUriValidator uriValidator,
             IdentityServerOptions options,
             ISystemClock clock,
             IRelyingPartyStore relyingParties)
@@ -100,11 +95,11 @@ namespace Abc.IdentityServer4.Saml2.Validation
 
         protected virtual Task ValidateRequestedResourcesAsync(ValidatedSaml2Request validatedRequest)
         {
-            var resourceValidationResult = new ResourceValidationResult();
+            var resourceValidationResult = new Ids.Validation.ResourceValidationResult();
 
             foreach (var item in validatedRequest.Client.AllowedScopes)
             {
-                resourceValidationResult.ParsedScopes.Add(new ParsedScopeValue(item));
+                resourceValidationResult.ParsedScopes.Add(new Ids.Validation.ParsedScopeValue(item));
             }
 
             validatedRequest.ValidatedResources = resourceValidationResult;
@@ -276,7 +271,7 @@ namespace Abc.IdentityServer4.Saml2.Validation
                 return new Saml2RequestValidationResult(request, "invalid_relying_party", "Cannot find Client configuration");
             }
 
-            if (client.ProtocolType != IdentityServerConstants.ProtocolTypes.Saml2p)
+            if (client.ProtocolType != Ids.IdentityServerConstants.ProtocolTypes.Saml2p)
             {
                 return new Saml2RequestValidationResult(request, "invalid_relying_party", "Client is not configured for SAML2");
             }

@@ -10,11 +10,6 @@
 using Abc.IdentityModel.Protocols.Saml2;
 using Abc.IdentityServer4.Saml2.ResponseProcessing;
 using Abc.IdentityServer4.Saml2.Validation;
-using IdentityServer4.Extensions;
-using IdentityServer4.Hosting;
-using IdentityServer4.Models;
-using IdentityServer4.Services;
-using IdentityServer4.Stores;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using System.Security.Claims;

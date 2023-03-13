@@ -1,6 +1,4 @@
-﻿using IdentityServer4.Models;
-using IdentityServer4.Services;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Abc.IdentityServer4.Saml2.Services.UnitTests

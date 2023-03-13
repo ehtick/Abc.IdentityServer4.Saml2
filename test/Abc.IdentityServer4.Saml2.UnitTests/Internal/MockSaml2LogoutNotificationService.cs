@@ -1,10 +1,13 @@
 ﻿using Abc.IdentityServer4.Saml2.Services;
-using IdentityServer4.Models;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+#if DUENDE
+namespace Duende.IdentityServer.Services
+#else
 namespace IdentityServer4.Services
+#endif
 {
     internal class MockSaml2LogoutNotificationService : ISaml2LogoutNotificationService, ILogoutNotificationService
     {

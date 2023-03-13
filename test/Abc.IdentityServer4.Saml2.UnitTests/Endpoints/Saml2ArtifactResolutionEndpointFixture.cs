@@ -1,9 +1,6 @@
 ﻿using Abc.IdentityModel.Protocols.Saml2;
 using Abc.IdentityServer4.Saml2.Stores;
 using FluentAssertions;
-using IdentityServer4.Configuration;
-using IdentityServer4.Endpoints.Results;
-using IdentityServer4.Extensions;
 using IdentityServer4.Services;
 using Microsoft.AspNetCore.Http;
 using System.IO;

@@ -25,6 +25,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{4E2FDC71-3BF
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{6C76DC15-7527-463B-B6EE-D40AC3EBA63E}"
+	ProjectSection(SolutionItems) = preProject
+		test\Directory.Build.props = test\Directory.Build.props
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "clients", "clients", "{B28A8CC2-998D-4A57-89E3-1519C2B29843}"
 EndProject
@@ -34,7 +37,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mvc5.Owin4.Saml2", "samples
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApp.Wif.Saml20", "samples\clients\WebApp.Wif.Saml2\WebApp.Wif.Saml20.csproj", "{CC010545-A226-4371-AFB4-BF3301AFC588}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Abc.IdentityServer4.Saml2.IntegrationTests", "test\Abc.IdentityServer4.Saml2.IntegrationTests\Abc.IdentityServer4.Saml2.IntegrationTests.csproj", "{3502CA73-E86E-4C4C-BB1E-FF5B41ABB27D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Abc.IdentityServer4.Saml2.IntegrationTests", "test\Abc.IdentityServer4.Saml2.IntegrationTests\Abc.IdentityServer4.Saml2.IntegrationTests.csproj", "{3502CA73-E86E-4C4C-BB1E-FF5B41ABB27D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Abc.DuendeIdentityServer.Saml2", "src\Abc.IdentityServer4.Saml2\Abc.DuendeIdentityServer.Saml2.csproj", "{F798D52F-31D5-4C54-818B-4AB8E8B3F112}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Abc.DuendeIdentityServer.Saml2.UnitTests", "test\Abc.IdentityServer4.Saml2.UnitTests\Abc.DuendeIdentityServer.Saml2.UnitTests.csproj", "{75462B96-3E28-4D5D-990D-ABEBDB455BB9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Abc.DuendeIdentityServer.Saml2.IntegrationTests", "test\Abc.IdentityServer4.Saml2.IntegrationTests\Abc.DuendeIdentityServer.Saml2.IntegrationTests.csproj", "{35CB14AB-31F4-4EE5-83F2-EBE384E553DD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -66,6 +75,18 @@ Global
 		{3502CA73-E86E-4C4C-BB1E-FF5B41ABB27D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3502CA73-E86E-4C4C-BB1E-FF5B41ABB27D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3502CA73-E86E-4C4C-BB1E-FF5B41ABB27D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F798D52F-31D5-4C54-818B-4AB8E8B3F112}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F798D52F-31D5-4C54-818B-4AB8E8B3F112}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F798D52F-31D5-4C54-818B-4AB8E8B3F112}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F798D52F-31D5-4C54-818B-4AB8E8B3F112}.Release|Any CPU.Build.0 = Release|Any CPU
+		{75462B96-3E28-4D5D-990D-ABEBDB455BB9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75462B96-3E28-4D5D-990D-ABEBDB455BB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75462B96-3E28-4D5D-990D-ABEBDB455BB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75462B96-3E28-4D5D-990D-ABEBDB455BB9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{35CB14AB-31F4-4EE5-83F2-EBE384E553DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35CB14AB-31F4-4EE5-83F2-EBE384E553DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35CB14AB-31F4-4EE5-83F2-EBE384E553DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35CB14AB-31F4-4EE5-83F2-EBE384E553DD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -80,6 +101,9 @@ Global
 		{5961F3EA-BF88-471E-8034-0DDFC0860A66} = {B28A8CC2-998D-4A57-89E3-1519C2B29843}
 		{CC010545-A226-4371-AFB4-BF3301AFC588} = {B28A8CC2-998D-4A57-89E3-1519C2B29843}
 		{3502CA73-E86E-4C4C-BB1E-FF5B41ABB27D} = {6C76DC15-7527-463B-B6EE-D40AC3EBA63E}
+		{F798D52F-31D5-4C54-818B-4AB8E8B3F112} = {4E2FDC71-3BF9-4A67-8B6D-26FFF1FDCC9A}
+		{75462B96-3E28-4D5D-990D-ABEBDB455BB9} = {6C76DC15-7527-463B-B6EE-D40AC3EBA63E}
+		{35CB14AB-31F4-4EE5-83F2-EBE384E553DD} = {6C76DC15-7527-463B-B6EE-D40AC3EBA63E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F4E80306-8EAB-47ED-9B43-E6DA525B6440}

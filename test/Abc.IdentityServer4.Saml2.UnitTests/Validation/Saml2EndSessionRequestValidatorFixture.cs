@@ -1,7 +1,4 @@
 ﻿using FluentAssertions;
-using IdentityServer4.Models;
-using IdentityServer4.Services;
-using IdentityServer4.Stores;
 using System;
 using System.Collections.Specialized;
 using System.Threading.Tasks;

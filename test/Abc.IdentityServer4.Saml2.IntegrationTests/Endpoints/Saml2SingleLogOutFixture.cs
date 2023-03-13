@@ -1,10 +1,6 @@
 ﻿using Abc.IdentityServer4.Saml2.IntegrationTests.Common;
-using Abc.IdentityServer4.Saml2.Stores;
 using FluentAssertions;
-using IdentityServer4.Models;
-using IdentityServer4.Test;
 using Microsoft.AspNetCore.WebUtilities;
-using Microsoft.Extensions.DependencyInjection;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -12,7 +8,6 @@ using System.Security.Claims;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using Xunit;
-using static IdentityServer4.IdentityServerConstants;
 
 namespace Abc.IdentityServer4.Saml2.Endpoints.IntegrationTests
 {
@@ -424,7 +419,7 @@ namespace Abc.IdentityServer4.Saml2.Endpoints.IntegrationTests
 
             // since we don't have real ws-fed, we used OIDC to signin, but fooling this
             // at signout to use ws-fed so we can test the iframe params
-            _wsfedClient.ProtocolType = ProtocolTypes.WsFederation;
+            _wsfedClient.ProtocolType = Ids.IdentityServerConstants.ProtocolTypes.WsFederation;
 
             response = await _mockPipeline.BrowserClient.GetAsync(signoutFrameUrl);
 

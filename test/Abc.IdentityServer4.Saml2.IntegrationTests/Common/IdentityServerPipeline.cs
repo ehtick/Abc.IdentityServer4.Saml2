@@ -2,12 +2,6 @@
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
 using IdentityModel.Client;
-using IdentityServer4;
-using IdentityServer4.Configuration;
-using IdentityServer4.Models;
-using IdentityServer4.Services;
-using IdentityServer4.Stores.Default;
-using IdentityServer4.Test;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -17,16 +11,12 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.IO.Compression;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Security.Claims;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Xml;
 
 namespace Abc.IdentityServer4.Saml2.IntegrationTests.Common
 {
@@ -144,15 +134,15 @@ namespace Abc.IdentityServer4.Saml2.IntegrationTests.Common
             .AddInMemoryApiScopes(ApiScopes)
             .AddTestUsers(Users)
             .AddSigningCredential(TestCert.LoadSigningCredentials())
-            .AddAuthorizationParametersMessageStore<DistributedCacheAuthorizationParametersMessageStore>()
+            .AddAuthorizationParametersMessageStore<Ids.Stores.Default.DistributedCacheAuthorizationParametersMessageStore>()
             .AddSaml2();
 
             services.AddDistributedMemoryCache();
 
-            services.AddHttpClient(IdentityServerConstants.HttpClients.BackChannelLogoutHttpClient)
+            services.AddHttpClient(Ids.IdentityServerConstants.HttpClients.BackChannelLogoutHttpClient)
                 .AddHttpMessageHandler(() => BackChannelMessageHandler);
 
-            services.AddHttpClient(IdentityServerConstants.HttpClients.JwtRequestUriHttpClient)
+            services.AddHttpClient(Ids.IdentityServerConstants.HttpClients.JwtRequestUriHttpClient)
                 .AddHttpMessageHandler(() => JwtRequestMessageHandler);
 
             OnPostConfigureServices(services);
@@ -296,20 +286,20 @@ namespace Abc.IdentityServer4.Saml2.IntegrationTests.Common
 
         public async Task LoginAsync(string subject)
         {
-            await LoginAsync(new IdentityServerUser(subject).CreatePrincipal());
+            await LoginAsync(new Ids.IdentityServerUser(subject).CreatePrincipal());
         }
 
         public void RemoveLoginCookie()
         {
-            BrowserClient.RemoveCookie(BaseUrl, IdentityServerConstants.DefaultCookieAuthenticationScheme);
+            BrowserClient.RemoveCookie(BaseUrl, Ids.IdentityServerConstants.DefaultCookieAuthenticationScheme);
         }
         public void RemoveSessionCookie()
         {
-            BrowserClient.RemoveCookie(BaseUrl, IdentityServerConstants.DefaultCheckSessionCookieName);
+            BrowserClient.RemoveCookie(BaseUrl, Ids.IdentityServerConstants.DefaultCheckSessionCookieName);
         }
         public Cookie GetSessionCookie()
         {
-            return BrowserClient.GetCookie(BaseUrl, IdentityServerConstants.DefaultCheckSessionCookieName);
+            return BrowserClient.GetCookie(BaseUrl, Ids.IdentityServerConstants.DefaultCheckSessionCookieName);
         }
 
         public string CreateAuthorizeUrl(
@@ -324,7 +314,12 @@ namespace Abc.IdentityServer4.Saml2.IntegrationTests.Common
             string responseMode = null,
             string codeChallenge = null,
             string codeChallengeMethod = null,
-            object extra = null)
+#if DUENDE
+            Parameters extra = null
+#else
+            object extra = null
+#endif
+            )
         {
             var url = new RequestUrl(AuthorizeEndpoint).CreateAuthorizeUrl(
                 clientId: clientId,

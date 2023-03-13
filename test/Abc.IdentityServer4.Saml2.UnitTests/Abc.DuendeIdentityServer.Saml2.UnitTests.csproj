@@ -4,10 +4,11 @@
     <EmbeddedResource Remove="obj\**" />
     <None Remove="obj\**" />
   </ItemGroup>
-  
+
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <LangVersion>10.0</LangVersion>
+    <DefineConstants>$(DefineConstants);DUENDE</DefineConstants>
   </PropertyGroup>
 
   <ItemGroup>
@@ -22,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Abc.IdentityServer4.Saml2\Abc.IdentityServer4.Saml2.csproj" />
+    <ProjectReference Include="..\..\src\Abc.IdentityServer4.Saml2\Abc.DuendeIdentityServer.Saml2.csproj" />
   </ItemGroup>
 
   <ItemGroup>

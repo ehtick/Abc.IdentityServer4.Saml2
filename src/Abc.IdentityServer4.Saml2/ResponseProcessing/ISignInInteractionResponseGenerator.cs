@@ -8,8 +8,6 @@
 // ----------------------------------------------------------------------------
 
 using Abc.IdentityServer4.Saml2.Validation;
-using IdentityServer4.Models;
-using IdentityServer4.ResponseHandling;
 using System.Threading.Tasks;
 
 namespace Abc.IdentityServer4.Saml2.ResponseProcessing

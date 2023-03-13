@@ -8,7 +8,6 @@
 // ----------------------------------------------------------------------------
 
 using Abc.IdentityServer4.Saml2.Services;
-using IdentityServer4.Validation;
 using System.Collections.Generic;
 
 namespace Abc.IdentityServer4.Saml2.Validation
@@ -17,7 +16,7 @@ namespace Abc.IdentityServer4.Saml2.Validation
     /// Validation result for end session callback requests.
     /// </summary>
     /// <seealso cref="ValidationResult" />
-    public class Saml2EndSessionCallbackValidationResult : ValidationResult
+    public class Saml2EndSessionCallbackValidationResult : Ids.Validation.ValidationResult
     {
         /// <summary>
         /// Gets the client front-channel logout requests.

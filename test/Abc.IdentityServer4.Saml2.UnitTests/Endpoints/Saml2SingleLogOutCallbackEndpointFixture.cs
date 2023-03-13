@@ -1,12 +1,6 @@
 ﻿using Abc.IdentityModel.Protocols.Saml2;
 using Abc.IdentityServer4.Saml2.Validation;
 using FluentAssertions;
-using IdentityServer4;
-using IdentityServer4.Endpoints.Results;
-using IdentityServer4.Extensions;
-using IdentityServer4.Models;
-using IdentityServer4.Services;
-using IdentityServer4.Stores;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
@@ -26,7 +20,7 @@ namespace Abc.IdentityServer4.Saml2.Endpoints.UnitTests
         private MockConsentMessageStore _mockUserConsentResponseMessageStore;
 
         private MockUserSession _mockUserSession = new MockUserSession();
-        private ClaimsPrincipal _user = new IdentityServerUser("bob").CreatePrincipal();
+        private ClaimsPrincipal _user = new Ids.IdentityServerUser("bob").CreatePrincipal();
 
         private StubSaml2RequestValidator _stubSignInRequestValidator = new StubSaml2RequestValidator();
         private StubSignInInteractionResponseGenerator _stubInteractionGenerator = new StubSignInInteractionResponseGenerator();

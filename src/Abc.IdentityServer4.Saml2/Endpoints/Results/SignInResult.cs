@@ -8,9 +8,7 @@
 // ----------------------------------------------------------------------------
 
 using Abc.IdentityModel.Protocols.Saml2;
-using IdentityServer4.Configuration;
 using IdentityServer4.Extensions;
-using IdentityServer4.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using System.Threading.Tasks;

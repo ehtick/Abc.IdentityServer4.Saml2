@@ -1,9 +1,12 @@
-﻿using IdentityServer4.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
+#if DUENDE
+namespace Duende.IdentityServer.Stores
+#else
 namespace IdentityServer4.Stores
+#endif
 {
     public class MockMessageStore<TModel> : IMessageStore<TModel>
     {

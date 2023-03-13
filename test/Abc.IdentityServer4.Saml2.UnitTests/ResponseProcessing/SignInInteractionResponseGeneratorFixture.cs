@@ -2,10 +2,6 @@
 using Abc.IdentityServer4.Saml2.Validation;
 using FluentAssertions;
 using IdentityModel;
-using IdentityServer4;
-using IdentityServer4.Configuration;
-using IdentityServer4.Models;
-using IdentityServer4.Validation;
 using Microsoft.AspNetCore.Authentication;
 using System;
 using System.Collections.Generic;
@@ -63,9 +59,9 @@ namespace Abc.IdentityServer4.Saml2.ResponseProcessing.UnitTests
             {
                 ClientId = "foo",
                 ValidatedResources = new ResourceValidationResult(),
-                Subject = new IdentityServerUser("123")
+                Subject = new Ids.IdentityServerUser("123")
                 {
-                    IdentityProvider = IdentityServerConstants.LocalIdentityProvider,
+                    IdentityProvider = Ids.IdentityServerConstants.LocalIdentityProvider,
                 }.CreatePrincipal(),
                 Saml2RequestMessage = new HttpSaml2RequestMessage2(new Uri("https://server/saml2"), new Saml2AuthenticationRequest()),
                 Client = new Client(),
@@ -82,16 +78,16 @@ namespace Abc.IdentityServer4.Saml2.ResponseProcessing.UnitTests
             var request = new ValidatedSaml2Request
             {
                 ClientId = "foo",
-                Subject = new IdentityServerUser("123")
+                Subject = new Ids.IdentityServerUser("123")
                 {
-                    IdentityProvider = IdentityServerConstants.LocalIdentityProvider,
+                    IdentityProvider = Ids.IdentityServerConstants.LocalIdentityProvider,
                 }.CreatePrincipal(),
                 Saml2RequestMessage = new HttpSaml2RequestMessage2(new Uri("https://server/saml2"), new Saml2AuthenticationRequest()),
                 Client = new Client
                 {
                     IdentityProviderRestrictions = new List<string>
                     {
-                        IdentityServerConstants.LocalIdentityProvider,
+                        Ids.IdentityServerConstants.LocalIdentityProvider,
                     },
                 },
             };
@@ -107,9 +103,9 @@ namespace Abc.IdentityServer4.Saml2.ResponseProcessing.UnitTests
             var request = new ValidatedSaml2Request
             {
                 ClientId = "foo",
-                Subject = new IdentityServerUser("123")
+                Subject = new Ids.IdentityServerUser("123")
                 {
-                    IdentityProvider = IdentityServerConstants.LocalIdentityProvider,
+                    IdentityProvider = Ids.IdentityServerConstants.LocalIdentityProvider,
                 }.CreatePrincipal(),
                 Saml2RequestMessage = new HttpSaml2RequestMessage2(new Uri("https://server/saml2"), new Saml2AuthenticationRequest()),
                 Client = new Client
@@ -132,14 +128,14 @@ namespace Abc.IdentityServer4.Saml2.ResponseProcessing.UnitTests
         {
             var authenticationContext = new Saml2RequestedAuthenticationContext();
             authenticationContext.ReferenceType = Saml2AuthenticationContextReferenceType.Class;
-            authenticationContext.References.Add(new Uri("idp:" + IdentityServerConstants.LocalIdentityProvider));
+            authenticationContext.References.Add(new Uri("idp:" + Ids.IdentityServerConstants.LocalIdentityProvider));
 
             var request = new ValidatedSaml2Request
             {
                 ClientId = "foo",
-                Subject = new IdentityServerUser("123")
+                Subject = new Ids.IdentityServerUser("123")
                 {
-                    IdentityProvider = IdentityServerConstants.LocalIdentityProvider,
+                    IdentityProvider = Ids.IdentityServerConstants.LocalIdentityProvider,
                 }.CreatePrincipal(),
                 Saml2RequestMessage = new HttpSaml2RequestMessage2(new Uri("https://server/saml2"), new Saml2AuthenticationRequest()
                 {
@@ -163,9 +159,9 @@ namespace Abc.IdentityServer4.Saml2.ResponseProcessing.UnitTests
             var request = new ValidatedSaml2Request
             {
                 ClientId = "foo",
-                Subject = new IdentityServerUser("123")
+                Subject = new Ids.IdentityServerUser("123")
                 {
-                    IdentityProvider = IdentityServerConstants.LocalIdentityProvider,
+                    IdentityProvider = Ids.IdentityServerConstants.LocalIdentityProvider,
                 }.CreatePrincipal(),
                 Saml2RequestMessage = new HttpSaml2RequestMessage2(new Uri("https://server/saml2"), new Saml2AuthenticationRequest()
                 {
@@ -185,7 +181,7 @@ namespace Abc.IdentityServer4.Saml2.ResponseProcessing.UnitTests
             var request = new ValidatedSaml2Request
             {
                 ClientId = "foo",
-                Subject = new IdentityServerUser("123")
+                Subject = new Ids.IdentityServerUser("123")
                 {
                     IdentityProvider = "local",
                     AuthenticationTime = _clock.UtcNow.UtcDateTime.Subtract(TimeSpan.FromSeconds(10)),
@@ -208,7 +204,7 @@ namespace Abc.IdentityServer4.Saml2.ResponseProcessing.UnitTests
             var request = new ValidatedSaml2Request
             {
                 ClientId = "foo",
-                Subject = new IdentityServerUser("123")
+                Subject = new Ids.IdentityServerUser("123")
                 {
                     IdentityProvider = "local",
                     AuthenticationTime = _clock.UtcNow.UtcDateTime.Subtract(TimeSpan.FromSeconds(3700)),
@@ -231,9 +227,9 @@ namespace Abc.IdentityServer4.Saml2.ResponseProcessing.UnitTests
             var request = new ValidatedSaml2Request
             {
                 ClientId = "foo",
-                Subject = new IdentityServerUser("123")
+                Subject = new Ids.IdentityServerUser("123")
                 {
-                    IdentityProvider = IdentityServerConstants.LocalIdentityProvider,
+                    IdentityProvider = Ids.IdentityServerConstants.LocalIdentityProvider,
                 }.CreatePrincipal(),
                 Saml2RequestMessage = new HttpSaml2RequestMessage2(new Uri("https://server/saml2"), new Saml2AuthenticationRequest()),
                 Client = new Client()
@@ -253,7 +249,7 @@ namespace Abc.IdentityServer4.Saml2.ResponseProcessing.UnitTests
             var request = new ValidatedSaml2Request
             {
                 ClientId = "foo",
-                Subject = new IdentityServerUser("123").CreatePrincipal(),
+                Subject = new Ids.IdentityServerUser("123").CreatePrincipal(),
                 Saml2RequestMessage = new HttpSaml2RequestMessage2(new Uri("https://server/saml2"), new Saml2AuthenticationRequest() {
                     ForceAuthentication = true,
                 }),

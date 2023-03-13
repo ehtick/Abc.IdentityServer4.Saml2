@@ -5,15 +5,24 @@
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/abc-software/Abc.IdentityServer4.Saml2</PackageProjectUrl>
     <PackageTags>identityserver;idsrv;saml2p;authentication;auth</PackageTags>
-    
+
     <RepositoryUrl>https://github.com/abc-software/Abc.IdentityServer4.Saml2.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     
     <Description>SAML2 protocol for IdentityServer4</Description>
-    <Version>1.0.0-dev76</Version>
+    <Version>1.0.0-dev77</Version>
 
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>ids.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(MSBuildProjectName)' == 'Abc.IdentityServer4.Saml2'">
+    <BaseIntermediateOutputPath>obj\IDS4\</BaseIntermediateOutputPath>
+    <OutputPath>bin\IDS4\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(MSBuildProjectName)' == 'Abc.DuendeIdentityServer.Saml2'">
+    <BaseIntermediateOutputPath>obj\DuendeIDS\</BaseIntermediateOutputPath>
+    <OutputPath>bin\DuendeIDS\</OutputPath>
   </PropertyGroup>
 
   <ItemGroup>

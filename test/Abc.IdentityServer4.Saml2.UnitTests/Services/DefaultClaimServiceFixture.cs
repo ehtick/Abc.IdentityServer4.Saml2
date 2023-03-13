@@ -1,15 +1,10 @@
 ﻿using FluentAssertions;
 using IdentityModel;
-using IdentityServer4;
-using IdentityServer4.Configuration;
-using IdentityServer4.Models;
-using IdentityServer4.Validation;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Xunit;
-using MockProfileService = IdentityServer4.Services.MockProfileService;
 
 namespace Abc.IdentityServer4.Saml2.Services.UnitTests
 {
@@ -17,7 +12,7 @@ namespace Abc.IdentityServer4.Saml2.Services.UnitTests
     {
         private DefaultClaimsService _target;
         private ValidatedRequest _validatedRequest;
-        private MockProfileService _mockMockProfileService = new MockProfileService();
+        private Ids.Services.MockProfileService _mockMockProfileService = new Ids.Services.MockProfileService();
         private Client _client;
         private ClaimsPrincipal _user;
 
@@ -29,7 +24,7 @@ namespace Abc.IdentityServer4.Saml2.Services.UnitTests
                 Claims = { new ClientClaim("some_claim", "some_claim_value") }
             };
 
-            _user = new IdentityServerUser("bob")
+            _user = new Ids.IdentityServerUser("bob")
             {
                 IdentityProvider = "idp",
                 AuthenticationMethods = { OidcConstants.AuthenticationMethods.Password },

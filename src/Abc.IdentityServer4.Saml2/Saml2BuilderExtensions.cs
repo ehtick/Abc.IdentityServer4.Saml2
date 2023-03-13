@@ -37,8 +37,8 @@ namespace Microsoft.Extensions.DependencyInjection
             builder.Services.AddTransient<ISaml2RequestValidator, Saml2RequestValidator>();
             builder.Services.AddTransient<ISignInInteractionResponseGenerator, SignInInteractionResponseGenerator>();
             //builder.Services.AddTransient<ISignOutValidator, SignOutValidator>();
-            builder.Services.AddTransient<IClaimsService, DefaultClaimsService>();
-            builder.Services.AddTransient<IdentityServer4.Services.IReturnUrlParser, Saml2ReturnUrlParser>();
+            builder.Services.AddTransient<Abc.IdentityServer4.Saml2.Services.IClaimsService, Abc.IdentityServer4.Saml2.Services.DefaultClaimsService>();
+            builder.Services.AddTransient<Ids.Services.IReturnUrlParser, Saml2ReturnUrlParser>();
 
             // to support federated logout, use iframe, only redirect binding support
             //builder.Services.Decorate<IdentityServer4.Services.ILogoutNotificationService, LogoutNotificationService>();
@@ -46,7 +46,7 @@ namespace Microsoft.Extensions.DependencyInjection
             // to support federated logout, use iframe 
             builder.Services.AddTransient<ISaml2LogoutNotificationService, Saml2LogoutNotificationService>();
             builder.Services.AddTransient<ISaml2EndSessionRequestValidator, Saml2EndSessionRequestValidator>();
-            builder.Services.Decorate<IdentityServer4.Services.IIdentityServerInteractionService, Saml2IdentityServerInteractionService>();
+            builder.Services.Decorate<Ids.Services.IIdentityServerInteractionService, Saml2IdentityServerInteractionService>();
 
             builder.Services.AddTransient<ILogoutRequestGenerator, LogoutRequestGenerator>();
             builder.Services.AddTransient<ILogoutResponseGenerator, LogoutResponseGenerator>();

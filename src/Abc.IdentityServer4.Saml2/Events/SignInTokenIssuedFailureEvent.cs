@@ -8,8 +8,6 @@
 // ----------------------------------------------------------------------------
 
 using Abc.IdentityServer4.Saml2.Validation;
-using IdentityServer4.Events;
-using IdentityServer4.Extensions;
 
 namespace Abc.IdentityServer4.Saml2.Events
 {

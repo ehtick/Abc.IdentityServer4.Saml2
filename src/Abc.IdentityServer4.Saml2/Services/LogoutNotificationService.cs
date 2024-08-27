@@ -9,10 +9,10 @@
 
 using Abc.IdentityModel.Http;
 using Abc.IdentityModel.Protocols.Saml2;
-using Abc.IdentityServer4.Saml2.ResponseProcessing;
-using Abc.IdentityServer4.Saml2.Stores;
-using Abc.IdentityServer4.Saml2.Validation;
-using IdentityServer4.Extensions;
+using Abc.IdentityServer.Saml2.ResponseProcessing;
+using Abc.IdentityServer.Saml2.Stores;
+using Abc.IdentityServer.Saml2.Validation;
+using Abc.IdentityServer.Extensions;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +20,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Abc.IdentityServer4.Saml2.Services
+namespace Abc.IdentityServer.Saml2.Services
 {
     internal class LogoutNotificationService : ILogoutNotificationService
     {

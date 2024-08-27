@@ -15,7 +15,7 @@ using System.Collections.Generic;
 using System.Security.Claims;
 using System.Security.Cryptography.X509Certificates;
 
-namespace Abc.IdentityServer4.Saml2
+namespace Abc.IdentityServer.Saml2
 {
     /// <summary>
     /// The options for the service provider's behavior.

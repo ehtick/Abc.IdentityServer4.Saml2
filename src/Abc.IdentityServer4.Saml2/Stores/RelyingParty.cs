@@ -10,7 +10,7 @@
 using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
 
-namespace Abc.IdentityServer4.Saml2.Stores
+namespace Abc.IdentityServer.Saml2.Stores
 {
     /// <summary>
     /// A service provider.

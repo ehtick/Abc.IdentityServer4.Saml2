@@ -13,7 +13,8 @@ namespace Microsoft.AspNetCore.Http
         public MockHttpContextAccessor(
             IdentityServerOptions options = null,
             IUserSession userSession = null,
-            IMessageStore<LogoutNotificationContext> endSessionStore = null)
+            IMessageStore<LogoutNotificationContext> endSessionStore = null,
+            IServerUrls serverUrls = null)
         {
             options = options ?? TestIdentityServerOptions.Create();
 
@@ -35,6 +36,15 @@ namespace Microsoft.AspNetCore.Http
             else
             {
                 services.AddSingleton(userSession);
+            }
+
+            if (serverUrls == null)
+            {
+                services.AddScoped<IServerUrls, DefaultServerUrls>();
+            }
+            else
+            {
+                services.AddSingleton(serverUrls);
             }
 
             if (endSessionStore == null)

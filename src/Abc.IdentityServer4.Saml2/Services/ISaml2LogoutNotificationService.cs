@@ -10,7 +10,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Abc.IdentityServer4.Saml2.Services
+namespace Abc.IdentityServer.Saml2.Services
 {
     public interface ISaml2LogoutNotificationService
     {

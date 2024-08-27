@@ -1,12 +1,12 @@
 ﻿using Abc.IdentityModel.Protocols.Saml2;
-using Abc.IdentityServer4.Saml2.Endpoints.UnitTests;
-using Abc.IdentityServer4.Saml2.Stores;
+using Abc.IdentityServer.Saml2.Endpoints.UnitTests;
+using Abc.IdentityServer.Saml2.Stores;
 using FluentAssertions;
 using System;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace Abc.IdentityServer4.Saml2.Services.UnitTests
+namespace Abc.IdentityServer.Saml2.Services.UnitTests
 {
     public class Saml2LogoutNotificationServiceFixture
     {

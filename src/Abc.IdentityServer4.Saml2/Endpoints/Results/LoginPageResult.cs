@@ -8,8 +8,8 @@
 // ----------------------------------------------------------------------------
 
 using Abc.IdentityModel.Protocols.Saml2;
-using Abc.IdentityServer4.Saml2.Validation;
-using IdentityServer4.Extensions;
+using Abc.IdentityServer.Saml2.Validation;
+using Abc.IdentityServer.Extensions;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,7 +17,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Abc.IdentityServer4.Saml2.Endpoints.Results
+namespace Abc.IdentityServer.Saml2.Endpoints.Results
 {
     /// <summary>
     /// Result for login page.
@@ -29,6 +29,7 @@ namespace Abc.IdentityServer4.Saml2.Endpoints.Results
         private IdentityServerOptions _options;
         private IAuthorizationParametersMessageStore _authorizationParametersMessageStore;
         private ISystemClock _clock;
+        private IServerUrls _urls;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="LoginPageResult"/> class.
@@ -40,11 +41,12 @@ namespace Abc.IdentityServer4.Saml2.Endpoints.Results
             _request = request ?? throw new ArgumentNullException(nameof(request));
         }
 
-        internal LoginPageResult(ValidatedSaml2Request request, IdentityServerOptions options, ISystemClock clock, IAuthorizationParametersMessageStore authorizationParametersMessageStore)
+        internal LoginPageResult(ValidatedSaml2Request request, IdentityServerOptions options, ISystemClock clock, IServerUrls urls, IAuthorizationParametersMessageStore authorizationParametersMessageStore)
             : this(request)
         {
             _options = options;
             _clock = clock;
+            _urls = urls;
             _authorizationParametersMessageStore = authorizationParametersMessageStore;
         }
 
@@ -53,7 +55,7 @@ namespace Abc.IdentityServer4.Saml2.Endpoints.Results
         {
             Init(context);
 
-            var returnUrl = context.GetIdentityServerBasePath().EnsureTrailingSlash() + Constants.ProtocolRoutePaths.SigleSignOnCallback;
+            var returnUrl = _urls.BasePath.EnsureTrailingSlash() + Constants.ProtocolRoutePaths.SigleSignOnCallback;
 
             var msg = new Message<IDictionary<string, string[]>>(_request.Saml2RequestMessage.ToDictionary(), _clock.UtcNow.UtcDateTime);
             var id = await _authorizationParametersMessageStore.WriteAsync(msg);
@@ -64,17 +66,18 @@ namespace Abc.IdentityServer4.Saml2.Endpoints.Results
             {
                 // this converts the relative redirect path to an absolute one if we're 
                 // redirecting to a different server
-                returnUrl = context.GetIdentityServerHost().EnsureTrailingSlash() + returnUrl.RemoveLeadingSlash();
+                returnUrl = _urls.Origin.EnsureTrailingSlash() + returnUrl.RemoveLeadingSlash();
             }
 
             var url = loginUrl.AddQueryString(_options.UserInteraction.LoginReturnUrlParameter, returnUrl);
-            context.Response.RedirectToAbsoluteUrl(url);
+            context.Response.Redirect(_urls.GetAbsoluteUrl(url));
         }
 
         private void Init(HttpContext context)
         {
             _options ??= context.RequestServices.GetRequiredService<IdentityServerOptions>();
             _authorizationParametersMessageStore ??= context.RequestServices.GetRequiredService<IAuthorizationParametersMessageStore>();
+            _urls ??= context.RequestServices.GetRequiredService<IServerUrls>();
             _clock ??= context.RequestServices.GetRequiredService<ISystemClock>();
         }
     }

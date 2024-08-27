@@ -7,19 +7,20 @@
 // </copyright>
 // ----------------------------------------------------------------------------
 
-using IdentityServer4.Extensions;
+using Abc.IdentityServer.Extensions;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using System.Threading.Tasks;
 
-namespace Abc.IdentityServer4.Saml2.Endpoints.Results
+namespace Abc.IdentityServer.Saml2.Endpoints.Results
 {
     internal class ErrorPageResult : IEndpointResult
     {
         private IMessageStore<ErrorMessage> _errorMessageStore;
         private IdentityServerOptions _options;
         private ISystemClock _clock;
+        private IServerUrls _urls;
 
         public ErrorPageResult(string error, string errorDescription)
         {
@@ -27,11 +28,12 @@ namespace Abc.IdentityServer4.Saml2.Endpoints.Results
             ErrorDescription = errorDescription;
         }
 
-        internal ErrorPageResult(string error, string errorDescription, IdentityServerOptions options, ISystemClock clock, IMessageStore<ErrorMessage> errorMessageStore)
+        internal ErrorPageResult(string error, string errorDescription, IdentityServerOptions options, ISystemClock clock, IServerUrls urls, IMessageStore<ErrorMessage> errorMessageStore)
             : this(error, errorDescription)
         {
             _options = options;
             _clock = clock;
+            _urls = urls;
             _errorMessageStore = errorMessageStore;
         }
 
@@ -56,13 +58,14 @@ namespace Abc.IdentityServer4.Saml2.Endpoints.Results
             var redirectUrl = _options.UserInteraction.ErrorUrl;
             redirectUrl = redirectUrl.AddQueryString(_options.UserInteraction.ErrorIdParameter, id);
 
-            context.Response.RedirectToAbsoluteUrl(redirectUrl);
+            context.Response.Redirect(_urls.GetAbsoluteUrl(redirectUrl));
         }
 
         private void Init(HttpContext context)
         {
             _errorMessageStore ??= context.RequestServices.GetRequiredService<IMessageStore<ErrorMessage>>();
             _options ??= context.RequestServices.GetRequiredService<IdentityServerOptions>();
+            _urls ??= context.RequestServices.GetRequiredService<IServerUrls>();
             _clock ??= context.RequestServices.GetRequiredService<ISystemClock>();
         }
     }

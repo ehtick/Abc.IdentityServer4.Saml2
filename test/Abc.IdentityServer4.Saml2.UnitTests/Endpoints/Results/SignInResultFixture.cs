@@ -8,7 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace Abc.IdentityServer4.Saml2.Endpoints.Results.UnitTests
+namespace Abc.IdentityServer.Saml2.Endpoints.Results.UnitTests
 {
     public class SignInResultFixture
     {
@@ -25,8 +25,6 @@ namespace Abc.IdentityServer4.Saml2.Endpoints.Results.UnitTests
             _serializer = new HttpSaml2MessageSerializer(null);
 
             _context = new DefaultHttpContext();
-            _context.SetIdentityServerOrigin("https://server");
-            _context.SetIdentityServerBasePath("/");
             _context.Response.Body = new MemoryStream();
 
             _message = new HttpSaml2ResponseMessage2(new Uri("http://client/callback"), "some_result", HttpDeliveryMethods.PostRequest);

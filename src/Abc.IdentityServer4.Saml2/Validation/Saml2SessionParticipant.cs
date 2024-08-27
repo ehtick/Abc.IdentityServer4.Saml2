@@ -7,11 +7,11 @@
 // </copyright>
 // ----------------------------------------------------------------------------
 
-using IdentityServer4.Extensions;
+using Abc.IdentityServer.Extensions;
 using System;
 using System.Diagnostics.CodeAnalysis;
 
-namespace Abc.IdentityServer4.Saml2.Validation
+namespace Abc.IdentityServer.Saml2.Validation
 {
     public record Saml2SessionParticipant(
         [NotNull] string ClientId,

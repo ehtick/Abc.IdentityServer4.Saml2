@@ -7,18 +7,18 @@
 // </copyright>
 // ----------------------------------------------------------------------------
 
-using IdentityServer4.Extensions;
+using Abc.IdentityServer.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Abc.IdentityServer4.Saml2.Stores
+namespace Abc.IdentityServer.Saml2.Stores
 {
     /// <summary>
     /// In memory relying party store.
     /// </summary>
-    /// <seealso cref="Abc.IdentityServer4.Saml2.Stores.IRelyingPartyStore" />
+    /// <seealso cref="Abc.IdentityServer.Saml2.Stores.IRelyingPartyStore" />
     public class InMemoryRelyingPartyStore : IRelyingPartyStore
     {
         private readonly IEnumerable<RelyingParty> _relyingParties;

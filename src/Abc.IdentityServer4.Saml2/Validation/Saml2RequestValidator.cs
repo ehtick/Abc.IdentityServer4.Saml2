@@ -8,9 +8,9 @@
 // ----------------------------------------------------------------------------
 
 using Abc.IdentityModel.Protocols.Saml2;
-using Abc.IdentityServer4.Extensions;
-using Abc.IdentityServer4.Saml2.Stores;
-using IdentityServer4.Extensions;
+using Abc.IdentityServer.Extensions;
+using Abc.IdentityServer.Saml2.Stores;
+using Abc.IdentityServer.Extensions;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.Extensions.Logging;
 using System.Linq;
@@ -18,7 +18,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Saml2AuthenticationRequest = Abc.IdentityModel.Protocols.Saml2.Saml2AuthenticationRequest;
 
-namespace Abc.IdentityServer4.Saml2.Validation
+namespace Abc.IdentityServer.Saml2.Validation
 {
     public class Saml2RequestValidator : ISaml2RequestValidator
     {

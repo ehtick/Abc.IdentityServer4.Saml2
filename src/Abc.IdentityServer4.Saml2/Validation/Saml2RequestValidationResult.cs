@@ -7,7 +7,7 @@
 // </copyright>
 // ----------------------------------------------------------------------------
 
-namespace Abc.IdentityServer4.Saml2.Validation
+namespace Abc.IdentityServer.Saml2.Validation
 {
     public class Saml2RequestValidationResult : Ids.Validation.ValidationResult
     {

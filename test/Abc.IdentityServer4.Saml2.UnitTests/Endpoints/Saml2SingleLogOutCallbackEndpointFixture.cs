@@ -1,5 +1,5 @@
 ﻿using Abc.IdentityModel.Protocols.Saml2;
-using Abc.IdentityServer4.Saml2.Validation;
+using Abc.IdentityServer.Saml2.Validation;
 using FluentAssertions;
 using Microsoft.AspNetCore.Http;
 using System;
@@ -8,7 +8,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace Abc.IdentityServer4.Saml2.Endpoints.UnitTests
+namespace Abc.IdentityServer.Saml2.Endpoints.UnitTests
 {
     public class Saml2SingleLogOutCallbackEndpointFixture
     {
@@ -38,8 +38,6 @@ namespace Abc.IdentityServer4.Saml2.Endpoints.UnitTests
         public Saml2SingleLogOutCallbackEndpointFixture()
         {
             _context = new DefaultHttpContext();
-            _context.SetIdentityServerOrigin("https://server");
-            _context.SetIdentityServerBasePath("/");
 
             _stubSignInRequestValidator = new StubSaml2RequestValidator();
             _stubInteractionGenerator = new StubSignInInteractionResponseGenerator();

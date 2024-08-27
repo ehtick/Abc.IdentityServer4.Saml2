@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Abc.IdentityServer4.Saml2.Services.UnitTests
+namespace Abc.IdentityServer.Saml2.Services.UnitTests
 {
     internal class StubLogoutNotificationService : ILogoutNotificationService
     {

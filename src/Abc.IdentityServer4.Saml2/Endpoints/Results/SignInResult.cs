@@ -8,12 +8,12 @@
 // ----------------------------------------------------------------------------
 
 using Abc.IdentityModel.Protocols.Saml2;
-using IdentityServer4.Extensions;
+using Abc.IdentityServer.Extensions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using System.Threading.Tasks;
 
-namespace Abc.IdentityServer4.Saml2.Endpoints.Results
+namespace Abc.IdentityServer.Saml2.Endpoints.Results
 {
     public class SignInResult : IEndpointResult
     {

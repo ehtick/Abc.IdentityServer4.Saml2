@@ -7,10 +7,10 @@
 // </copyright>
 // ----------------------------------------------------------------------------
 
-using Abc.IdentityServer4.Saml2.Services;
+using Abc.IdentityServer.Saml2.Services;
 using System.Collections.Generic;
 
-namespace Abc.IdentityServer4.Saml2.Validation
+namespace Abc.IdentityServer.Saml2.Validation
 {
     /// <summary>
     /// Validation result for end session callback requests.

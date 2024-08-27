@@ -1,4 +1,4 @@
-using Abc.IdentityServer4.Saml2.Stores;
+using Abc.IdentityServer.Saml2.Stores;
 using IdentityModel;
 using IdentityServer4.Models;
 using Microsoft.IdentityModel.Tokens;

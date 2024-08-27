@@ -12,7 +12,7 @@ using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
-namespace Abc.IdentityServer4.Saml2.Services
+namespace Abc.IdentityServer.Saml2.Services
 {
     /// <summary>
     /// Default claims service implementation.

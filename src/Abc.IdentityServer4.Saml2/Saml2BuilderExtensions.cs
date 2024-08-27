@@ -7,13 +7,13 @@
 // </copyright>
 // ----------------------------------------------------------------------------
 
-using Abc.IdentityServer4.Saml2;
-using Abc.IdentityServer4.Saml2.Endpoints;
-using Abc.IdentityServer4.Saml2.ResponseProcessing;
-using Abc.IdentityServer4.Saml2.Services;
-using Abc.IdentityServer4.Saml2.Stores;
-using Abc.IdentityServer4.Saml2.Validation;
-using IdentityServer4.Extensions;
+using Abc.IdentityServer.Saml2;
+using Abc.IdentityServer.Saml2.Endpoints;
+using Abc.IdentityServer.Saml2.ResponseProcessing;
+using Abc.IdentityServer.Saml2.Services;
+using Abc.IdentityServer.Saml2.Stores;
+using Abc.IdentityServer.Saml2.Validation;
+using Abc.IdentityServer.Extensions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Options;
@@ -32,12 +32,16 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IIdentityServerBuilder AddSaml2<TStore>(this IIdentityServerBuilder builder)
             where TStore : class, IRelyingPartyStore
         {
+#if IDS4
+            builder.Services.AddTransient<IServerUrls, DefaultServerUrls>();
+            builder.Services.AddTransient<IIssuerNameService, DefaultIssuerNameService>();
+#endif
             builder.Services.AddTransient<IMetadataResponseGenerator, MetadataResponseGenerator>();
             builder.Services.AddTransient<ISignInResponseGenerator, SignInResponseGenerator>();
             builder.Services.AddTransient<ISaml2RequestValidator, Saml2RequestValidator>();
             builder.Services.AddTransient<ISignInInteractionResponseGenerator, SignInInteractionResponseGenerator>();
             //builder.Services.AddTransient<ISignOutValidator, SignOutValidator>();
-            builder.Services.AddTransient<Abc.IdentityServer4.Saml2.Services.IClaimsService, Abc.IdentityServer4.Saml2.Services.DefaultClaimsService>();
+            builder.Services.AddTransient<Abc.IdentityServer.Saml2.Services.IClaimsService, Abc.IdentityServer.Saml2.Services.DefaultClaimsService>();
             builder.Services.AddTransient<Ids.Services.IReturnUrlParser, Saml2ReturnUrlParser>();
 
             // to support federated logout, use iframe, only redirect binding support

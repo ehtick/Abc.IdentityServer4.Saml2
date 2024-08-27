@@ -1,5 +1,5 @@
-﻿using Abc.IdentityServer4.Saml2.Services;
-using Abc.IdentityServer4.Saml2.Validation;
+﻿using Abc.IdentityServer.Saml2.Services;
+using Abc.IdentityServer.Saml2.Validation;
 using FluentAssertions;
 using Microsoft.AspNetCore.Http;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace Abc.IdentityServer4.Saml2.Endpoints.Results.UnitTests
+namespace Abc.IdentityServer.Saml2.Endpoints.Results.UnitTests
 {
     public class EndSessionCallbackResultFixture
     {
@@ -20,8 +20,6 @@ namespace Abc.IdentityServer4.Saml2.Endpoints.Results.UnitTests
         public EndSessionCallbackResultFixture()
         {
             _context = new DefaultHttpContext();
-            _context.SetIdentityServerOrigin("https://server");
-            _context.SetIdentityServerBasePath("/");
             _context.Response.Body = new MemoryStream();
 
             _options = new IdentityServerOptions();

@@ -1,15 +1,13 @@
 ﻿using Abc.IdentityModel.Metadata;
 using Abc.IdentityModel.Protocols.Saml2;
 using FluentAssertions;
-using IdentityModel;
-using IdentityServer4.Extensions;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.IO;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace Abc.IdentityServer4.Saml2.Endpoints.Results.UnitTests
+namespace Abc.IdentityServer.Saml2.Endpoints.Results.UnitTests
 {
     public class MetadataResultFixture
     {
@@ -20,8 +18,6 @@ namespace Abc.IdentityServer4.Saml2.Endpoints.Results.UnitTests
         public MetadataResultFixture()
         {
             _context = new DefaultHttpContext();
-            _context.SetIdentityServerOrigin("https://server");
-            _context.SetIdentityServerBasePath("/");
             _context.Response.Body = new MemoryStream();
 
             var descriptor = new IdpSsoDescriptor();

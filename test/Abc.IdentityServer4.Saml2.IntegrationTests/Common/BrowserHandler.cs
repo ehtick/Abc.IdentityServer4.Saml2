@@ -8,7 +8,7 @@ using System.Threading;
 using System;
 using System.Linq;
 
-namespace Abc.IdentityServer4.Saml2.IntegrationTests.Common
+namespace Abc.IdentityServer.Saml2.IntegrationTests.Common
 {
     // thanks to Damian Hickey for this awesome sample
     // https://github.com/damianh/OwinHttpMessageHandler/blob/master/src/OwinHttpMessageHandler/OwinHttpMessageHandler.cs

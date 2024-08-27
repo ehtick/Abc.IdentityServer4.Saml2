@@ -7,11 +7,11 @@
 // </copyright>
 // ----------------------------------------------------------------------------
 
-using Abc.IdentityServer4.Saml2.Validation;
+using Abc.IdentityServer.Saml2.Validation;
 using IdentityModel;
 using System.Collections.Generic;
 
-namespace Abc.IdentityServer4.Saml2.Logging
+namespace Abc.IdentityServer.Saml2.Logging
 {
     internal class ValidatedSaml2RequestLog
     {

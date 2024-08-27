@@ -9,12 +9,12 @@
 
 using System.Threading.Tasks;
 
-namespace Abc.IdentityServer4.Saml2.Stores
+namespace Abc.IdentityServer.Saml2.Stores
 {
     /// <summary>
     /// No relaying party store.
     /// </summary>
-    /// <seealso cref="Abc.IdentityServer4.Saml2.Stores.IRelyingPartyStore" />
+    /// <seealso cref="Abc.IdentityServer.Saml2.Stores.IRelyingPartyStore" />
     public class NoRelyingPartyStore : IRelyingPartyStore
     {
         /// <inheritdoc/>

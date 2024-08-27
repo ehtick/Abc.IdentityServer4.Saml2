@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Abc.IdentityServer4.Saml2.Stores
+namespace Abc.IdentityServer.Saml2.Stores
 {
     internal class MockArtifactStore : IArtifactStore
     {

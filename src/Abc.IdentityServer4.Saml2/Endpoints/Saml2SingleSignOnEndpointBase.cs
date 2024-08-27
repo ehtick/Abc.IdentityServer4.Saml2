@@ -8,14 +8,14 @@
 // ----------------------------------------------------------------------------
 
 using Abc.IdentityModel.Protocols.Saml2;
-using Abc.IdentityServer4.Saml2.ResponseProcessing;
-using Abc.IdentityServer4.Saml2.Validation;
+using Abc.IdentityServer.Saml2.ResponseProcessing;
+using Abc.IdentityServer.Saml2.Validation;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
-namespace Abc.IdentityServer4.Saml2.Endpoints
+namespace Abc.IdentityServer.Saml2.Endpoints
 {
     internal abstract class Saml2SingleSignOnEndpointBase : IEndpointHandler
     {

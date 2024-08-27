@@ -7,13 +7,13 @@
 // </copyright>
 // ----------------------------------------------------------------------------
 
-using Abc.IdentityServer4.Saml2.Services;
+using Abc.IdentityServer.Saml2.Services;
 using Microsoft.Extensions.Logging;
 using System.Collections.Specialized;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Abc.IdentityServer4.Saml2.Validation
+namespace Abc.IdentityServer.Saml2.Validation
 {
     internal class Saml2EndSessionRequestValidator : ISaml2EndSessionRequestValidator
     {

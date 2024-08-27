@@ -7,7 +7,7 @@ using System.Linq;
 using Xunit;
 using Saml2LogoutRequest = Abc.IdentityModel.Protocols.Saml2.Saml2LogoutRequest;
 
-namespace Abc.IdentityServer4.Saml2.UnitTests
+namespace Abc.IdentityServer.Saml2.UnitTests
 {
     public class HttpSaml2MessageExtensionsFixture
     {

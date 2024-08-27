@@ -9,9 +9,7 @@
 
 using Abc.IdentityModel.Metadata;
 using Abc.IdentityModel.Protocols.Saml2;
-using IdentityServer4.Extensions;
-using IdentityServer4.Services;
-using Microsoft.AspNetCore.Http;
+using Abc.IdentityServer.Extensions;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.IdentityModel.Xml;
 using System;
@@ -19,40 +17,47 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
-namespace Abc.IdentityServer4.Saml2.ResponseProcessing
+namespace Abc.IdentityServer.Saml2.ResponseProcessing
 {
     /// <summary>
     /// The SAML2 metadata response generator implementation.
     /// </summary>
-    /// <seealso cref="Abc.IdentityServer4.Saml2.ResponseProcessing.IMetadataResponseGenerator" />
+    /// <seealso cref="Abc.IdentityServer.Saml2.ResponseProcessing.IMetadataResponseGenerator" />
     public class MetadataResponseGenerator : IMetadataResponseGenerator
     {
         private readonly IdentityServerOptions _options;
         private readonly IResourceStore _resources;
         private readonly Services.IClaimsService _claims;
+        private readonly IServerUrls _urls;
         private readonly IKeyMaterialService _keys;
-        private readonly IHttpContextAccessor _contextAccessor;
+        private readonly IIssuerNameService _issuerNameService;
         private readonly Saml2SPOptions _spOptions;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MetadataResponseGenerator"/> class.
         /// </summary>
-        /// <param name="keys">The keys.</param>
-        /// <param name="contextAccessor">The context accessor.</param>
         /// <param name="options">The options.</param>
+        /// <param name="resources">The resource store.</param>
+        /// <param name="claimsService">The claims service.</param>
+        /// <param name="issuerNameService">The issuer name service.</param>
+        /// <param name="urls">The server urls.</param>
+        /// <param name="keys">The keys.</param>
+        /// <param name="spOptions">The SAML2 service provider options.</param>
         public MetadataResponseGenerator(
             IdentityServerOptions options,
             IResourceStore resources,
             Services.IClaimsService claimsService,
+            IIssuerNameService issuerNameService,
+            IServerUrls urls,
             IKeyMaterialService keys, 
-            IHttpContextAccessor contextAccessor, 
             Saml2SPOptions spOptions)
         {
             _options = options;
             _resources = resources;
             _claims = claimsService;
+            _issuerNameService = issuerNameService;
+            _urls = urls;
             _keys = keys;
-            _contextAccessor = contextAccessor;
             _spOptions = spOptions;
         }
 
@@ -62,8 +67,8 @@ namespace Abc.IdentityServer4.Saml2.ResponseProcessing
             var credentials = await _keys.GetX509SigningCredentialsAsync();
             var signingKey = credentials.Key as X509SecurityKey;
 
-            var issuer = _contextAccessor.HttpContext.GetIdentityServerIssuerUri();
-            var baseUrl = _contextAccessor.HttpContext.GetIdentityServerBaseUrl();
+            var issuer = await _issuerNameService.GetCurrentAsync();
+            var baseUrl = _urls.BaseUrl;
             var signingCredentials = new SigningCredentials(signingKey, SecurityAlgorithms.RsaSha256Signature, SecurityAlgorithms.Sha256Digest);
 
             var entityDescriptor = new EntityDescriptor(new EntityId(issuer));

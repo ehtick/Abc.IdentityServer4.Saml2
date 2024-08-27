@@ -1,28 +1,24 @@
 ﻿using Abc.IdentityModel.Protocols.Saml2;
-using Abc.IdentityServer4.Saml2.Stores;
+using Abc.IdentityServer.Saml2.Stores;
 using FluentAssertions;
-using IdentityServer4.Services;
 using Microsoft.AspNetCore.Http;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace Abc.IdentityServer4.Saml2.Endpoints.UnitTests
+namespace Abc.IdentityServer.Saml2.Endpoints.UnitTests
 {
     public class Saml2ArtifactResolutionEndpointFixture
     {
         private MockKeyMaterialService _mockKeyMaterialService = new MockKeyMaterialService();
-        private IdentityServerOptions _options = new IdentityServerOptions() {  IssuerUri = "https://idp.example.org/SAML2" };
-        private IHttpContextAccessor _mockContextAccessor;
         private MockArtifactStore _mockArtifactStore = new MockArtifactStore();
         private Saml2ArtifactResolutionEndpoint _target;
         private HttpContext _context;
+        private IIssuerNameService _issuerNameService = new TestIssuerNameService("https://idp.example.org/SAML2") ;
 
         public Saml2ArtifactResolutionEndpointFixture()
         {
-            _mockContextAccessor = new MockHttpContextAccessor(options: _options);
-
             string xmlBody = @"
 <soap:Envelope xmlns:soap=""http://schemas.xmlsoap.org/soap/envelope/"">
 <soap:Body>
@@ -38,8 +34,6 @@ namespace Abc.IdentityServer4.Saml2.Endpoints.UnitTests
 ";
 
             _context = new DefaultHttpContext();
-            _context.SetIdentityServerOrigin("https://server");
-            _context.SetIdentityServerBasePath("/");
             _context.Response.Body = new MemoryStream();
             _context.Request.Body = new MemoryStream(Encoding.UTF8.GetBytes(xmlBody));
             _context.Request.Method = "POST";
@@ -48,7 +42,7 @@ namespace Abc.IdentityServer4.Saml2.Endpoints.UnitTests
 
             _target = new Saml2ArtifactResolutionEndpoint(
                 _mockArtifactStore,
-                _mockContextAccessor,
+                _issuerNameService,
                 _mockKeyMaterialService,
                 TestLogger.Create<Saml2ArtifactResolutionEndpoint>()
                 );

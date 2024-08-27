@@ -4,7 +4,7 @@ using Microsoft.IdentityModel.Tokens.Saml2;
 using System;
 using Xunit;
 
-namespace Abc.IdentityServer4.Saml2.UnitTests
+namespace Abc.IdentityServer.Saml2.UnitTests
 {
     public class Saml2RequestExtnesionsFixture
     {

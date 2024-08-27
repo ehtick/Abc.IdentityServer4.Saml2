@@ -10,6 +10,7 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PreserveCompilationContext>true</PreserveCompilationContext>
     <LangVersion>10.0</LangVersion>
+    <DefineConstants>$(DefineConstants);IDS4</DefineConstants>
   </PropertyGroup>
 
   <PropertyGroup>

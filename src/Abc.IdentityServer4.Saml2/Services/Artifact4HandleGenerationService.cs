@@ -1,5 +1,5 @@
 ﻿using Abc.IdentityModel.Protocols;
-using IdentityServer4.Extensions;
+using Abc.IdentityServer.Extensions;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;

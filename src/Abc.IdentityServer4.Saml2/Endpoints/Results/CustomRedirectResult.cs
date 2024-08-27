@@ -8,8 +8,8 @@
 // ----------------------------------------------------------------------------
 
 using Abc.IdentityModel.Protocols.Saml2;
-using Abc.IdentityServer4.Saml2.Validation;
-using IdentityServer4.Extensions;
+using Abc.IdentityServer.Extensions;
+using Abc.IdentityServer.Saml2.Validation;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,7 +17,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Abc.IdentityServer4.Saml2.Endpoints.Results
+namespace Abc.IdentityServer.Saml2.Endpoints.Results
 {
     internal class CustomRedirectResult : IEndpointResult
     {
@@ -25,6 +25,7 @@ namespace Abc.IdentityServer4.Saml2.Endpoints.Results
         private readonly string _url;
         private IdentityServerOptions _options;
         private ISystemClock _clock;
+        private IServerUrls _urls;
         private IAuthorizationParametersMessageStore _authorizationParametersMessageStore;
 
         public CustomRedirectResult(ValidatedSaml2Request request, string url)
@@ -43,11 +44,12 @@ namespace Abc.IdentityServer4.Saml2.Endpoints.Results
             _url = url;
         }
 
-        internal CustomRedirectResult(ValidatedSaml2Request request, string url, IdentityServerOptions options, ISystemClock clock, IAuthorizationParametersMessageStore authorizationParametersMessageStore = null)
+        internal CustomRedirectResult(ValidatedSaml2Request request, string url, IdentityServerOptions options, ISystemClock clock, IServerUrls urls, IAuthorizationParametersMessageStore authorizationParametersMessageStore = null)
             : this(request, url)
         {
             _options = options;
             _clock = clock;
+            _urls = urls;
             _authorizationParametersMessageStore = authorizationParametersMessageStore;
         }
 
@@ -55,7 +57,7 @@ namespace Abc.IdentityServer4.Saml2.Endpoints.Results
         {
             Init(context);
 
-            var returnUrl = context.GetIdentityServerBasePath().EnsureTrailingSlash() + Constants.ProtocolRoutePaths.SigleSignOnCallback;
+            var returnUrl = _urls.BaseUrl.EnsureTrailingSlash() + Constants.ProtocolRoutePaths.SigleSignOnCallback;
 
             var msg = new Message<IDictionary<string, string[]>>(_request.Saml2RequestMessage.ToDictionary(), _clock.UtcNow.UtcDateTime);
             var id = await _authorizationParametersMessageStore.WriteAsync(msg);
@@ -65,17 +67,18 @@ namespace Abc.IdentityServer4.Saml2.Endpoints.Results
             {
                 // this converts the relative redirect path to an absolute one if we're 
                 // redirecting to a different server
-                returnUrl = context.GetIdentityServerBaseUrl().EnsureTrailingSlash() + returnUrl.RemoveLeadingSlash();
+                returnUrl = _urls.BaseUrl.EnsureTrailingSlash() + returnUrl.RemoveLeadingSlash();
             }
 
             var url = _url.AddQueryString(_options.UserInteraction.CustomRedirectReturnUrlParameter, returnUrl);
-            context.Response.RedirectToAbsoluteUrl(url);
+            context.Response.Redirect(_urls.GetAbsoluteUrl(url));
         }
 
         private void Init(HttpContext context)
         {
             _options ??= context.RequestServices.GetRequiredService<IdentityServerOptions>();
             _authorizationParametersMessageStore ??= context.RequestServices.GetRequiredService<IAuthorizationParametersMessageStore>();
+            _urls ??= context.RequestServices.GetRequiredService<IServerUrls>();
             _clock ??= context.RequestServices.GetRequiredService<ISystemClock>();
         }
     }

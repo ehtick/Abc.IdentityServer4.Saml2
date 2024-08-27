@@ -1,9 +1,9 @@
 ﻿using FluentAssertions;
-using IdentityServer4.Extensions;
+using Abc.IdentityServer.Extensions;
 using System.Linq;
 using Xunit;
 
-namespace Abc.IdentityServer4.Saml2.UnitTests
+namespace Abc.IdentityServer.Saml2.UnitTests
 {
     public class StringExtensionsFixture {
         #region GetOrigin
@@ -166,6 +166,20 @@ namespace Abc.IdentityServer4.Saml2.UnitTests
         public void CheckRemoveLeadingSlash(string inputUrl, string expected)
         {
             var actualOrigin = inputUrl.RemoveLeadingSlash();
+
+            actualOrigin.Should().Be(expected);
+        }
+
+        [Theory]
+        [InlineData(null, null)]
+        [InlineData("", "")]
+        [InlineData("test/resource/", "test/resource")]
+        [InlineData("/test/resource/", "/test/resource")]
+        [InlineData("test/resource", "test/resource")]
+        [InlineData("/test/resource", "/test/resource")]
+        public void CheckRemoveTrailingSlash(string inputUrl, string expected)
+        {
+            var actualOrigin = inputUrl.RemoveTrailingSlash();
 
             actualOrigin.Should().Be(expected);
         }

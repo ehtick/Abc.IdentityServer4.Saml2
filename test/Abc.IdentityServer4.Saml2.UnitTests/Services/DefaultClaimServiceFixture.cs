@@ -6,7 +6,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace Abc.IdentityServer4.Saml2.Services.UnitTests
+namespace Abc.IdentityServer.Saml2.Services.UnitTests
 {
     public class DefaultClaimServiceFixture
     {

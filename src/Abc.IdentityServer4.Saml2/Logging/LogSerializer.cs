@@ -13,7 +13,7 @@ using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace Abc.IdentityServer4.Saml2.Logging
+namespace Abc.IdentityServer.Saml2.Logging
 {
     /// <summary>
     /// Helper to JSON serialize object data for logging.

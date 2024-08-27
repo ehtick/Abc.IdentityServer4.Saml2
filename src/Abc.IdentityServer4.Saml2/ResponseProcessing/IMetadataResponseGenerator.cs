@@ -10,7 +10,7 @@
 using Abc.IdentityModel.Metadata;
 using System.Threading.Tasks;
 
-namespace Abc.IdentityServer4.Saml2.ResponseProcessing
+namespace Abc.IdentityServer.Saml2.ResponseProcessing
 {
     /// <summary>
     /// The SAML2 metadata response generator.

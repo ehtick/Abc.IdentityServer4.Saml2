@@ -1,7 +1,7 @@
-﻿using Abc.IdentityServer4.Saml2.Stores;
+﻿using Abc.IdentityServer.Saml2.Stores;
 using Microsoft.AspNetCore.Authentication;
 
-namespace Abc.IdentityServer4.Saml2.Validation.UnitTests
+namespace Abc.IdentityServer.Saml2.Validation.UnitTests
 {
     public abstract class Saml2RequestValidatorBase
     {

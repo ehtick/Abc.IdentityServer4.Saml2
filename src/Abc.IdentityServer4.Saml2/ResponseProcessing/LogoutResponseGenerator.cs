@@ -9,39 +9,36 @@
 
 using Abc.IdentityModel.Http;
 using Abc.IdentityModel.Protocols.Saml2;
-using Abc.IdentityServer4.Saml2.Stores;
-using Abc.IdentityServer4.Saml2.Validation;
-using IdentityServer4.Extensions;
-using IdentityServer4.Services;
+using Abc.IdentityServer.Extensions;
+using Abc.IdentityServer.Saml2.Validation;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.IdentityModel.Tokens.Saml2;
 using System;
-using System.Linq;
 using System.Threading.Tasks;
 
-namespace Abc.IdentityServer4.Saml2.ResponseProcessing
+namespace Abc.IdentityServer.Saml2.ResponseProcessing
 {
     internal class LogoutResponseGenerator : ILogoutResponseGenerator
     {
         private readonly ILogger _logger;
         private readonly Saml2SPOptions _options;
-        private readonly IHttpContextAccessor _contextAccessor;
+        private readonly IIssuerNameService _issuerNameService;
         private readonly IKeyMaterialService _keys;
         private readonly ISystemClock _clock;
 
         public LogoutResponseGenerator(
             ILogger<LogoutResponseGenerator> logger,
             Saml2SPOptions options,
-            IHttpContextAccessor contextAccessor,
+            IIssuerNameService issuerNameService,
             IKeyMaterialService keys,
             ISystemClock clock)
         {
             _logger = logger;
             _options = options;
-            _contextAccessor = contextAccessor;
+            _issuerNameService = issuerNameService;
             _keys = keys;
             _clock = clock;
         }
@@ -53,7 +50,7 @@ namespace Abc.IdentityServer4.Saml2.ResponseProcessing
             var validatedRequest = validationResult.ValidatedRequest;
 
             var credentials = await _keys.GetX509SigningCredentialsAsync();
-            var issuer = _contextAccessor.HttpContext.GetIdentityServerIssuerUri();
+            var issuer = await _issuerNameService.GetCurrentAsync();
             var issueInstant = _clock.UtcNow.UtcDateTime;
 
             var signingCredentials = new SigningCredentials(

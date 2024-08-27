@@ -9,10 +9,9 @@
 
 using Abc.IdentityModel.Protocols;
 using Abc.IdentityModel.Protocols.Saml2;
-using Abc.IdentityServer4.Saml2.Validation;
+using Abc.IdentityServer.Extensions;
+using Abc.IdentityServer.Saml2.Validation;
 using IdentityModel;
-using IdentityServer4.Extensions;
-using IdentityServer4.Services;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
@@ -26,13 +25,14 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
-namespace Abc.IdentityServer4.Saml2.ResponseProcessing
+namespace Abc.IdentityServer.Saml2.ResponseProcessing
 {
     internal class SignInResponseGenerator : ISignInResponseGenerator
     {
         private readonly ILogger _logger;
         private readonly Saml2SPOptions _options;
         private readonly IResourceStore _resources;
+        private readonly IIssuerNameService _issuerNameService;
         private readonly IHttpContextAccessor _contextAccessor;
         private readonly IKeyMaterialService _keys;
         private readonly Services.IClaimsService _claimsService;
@@ -43,6 +43,7 @@ namespace Abc.IdentityServer4.Saml2.ResponseProcessing
             ILogger<SignInResponseGenerator> logger,
             Saml2SPOptions options,
             IResourceStore resources,
+            IIssuerNameService issuerNameService,
             IHttpContextAccessor contextAccessor,
             IKeyMaterialService keys,
             Services.IClaimsService claimsService,
@@ -52,6 +53,7 @@ namespace Abc.IdentityServer4.Saml2.ResponseProcessing
             _logger = logger;
             _options = options;
             _resources = resources;
+            _issuerNameService = issuerNameService;
             _contextAccessor = contextAccessor;
             _keys = keys;
             _claimsService = claimsService;
@@ -170,7 +172,7 @@ namespace Abc.IdentityServer4.Saml2.ResponseProcessing
         private async Task<HttpSaml2Message2> CreateResponseAsync(ValidatedSaml2Request validatedRequest, ClaimsIdentity outgoingSubject)
         {
             var credentials = await _keys.GetX509SigningCredentialsAsync();
-            var issuer = _contextAccessor.HttpContext.GetIdentityServerIssuerUri();
+            var issuer = await _issuerNameService.GetCurrentAsync();
             var issueInstant = _clock.UtcNow.UtcDateTime;
 
             var signingCredentials = new SigningCredentials(

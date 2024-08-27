@@ -8,14 +8,14 @@
 // ----------------------------------------------------------------------------
 
 using Abc.IdentityModel.Protocols.Saml2;
-using Abc.IdentityServer4.Saml2.Validation;
-using IdentityServer4.Extensions;
+using Abc.IdentityServer.Saml2.Validation;
+using Abc.IdentityServer.Extensions;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Threading.Tasks;
 
-namespace Abc.IdentityServer4.Saml2
+namespace Abc.IdentityServer.Saml2
 {
     /// <summary>
     /// Parses a return URL using all registered URL parsers.

@@ -7,7 +7,7 @@
 // </copyright>
 // ----------------------------------------------------------------------------
 
-namespace Abc.IdentityServer4.Saml2
+namespace Abc.IdentityServer.Saml2
 {
     internal static class Constants
     {

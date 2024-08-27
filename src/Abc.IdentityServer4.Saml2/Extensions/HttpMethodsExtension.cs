@@ -10,10 +10,8 @@
 using Abc.IdentityModel.Http;
 using Abc.IdentityModel.Protocols.Saml2;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace Abc.IdentityServer4.Saml2.Extensions
+namespace Abc.IdentityServer.Saml2.Extensions
 {
     internal static class HttpMethodsExtension
     {

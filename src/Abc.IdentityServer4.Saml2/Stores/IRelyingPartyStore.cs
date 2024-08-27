@@ -9,7 +9,7 @@
 
 using System.Threading.Tasks;
 
-namespace Abc.IdentityServer4.Saml2.Stores
+namespace Abc.IdentityServer.Saml2.Stores
 {
     /// <summary>
     /// The relying party store.

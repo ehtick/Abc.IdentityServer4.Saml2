@@ -12,7 +12,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Threading.Tasks;
 
-namespace Abc.IdentityServer4.Saml2.Stores
+namespace Abc.IdentityServer.Saml2.Stores
 {
     internal class DefaultArtifactStore : DefaultGrantStore<Saml2Response>, IArtifactStore
     {

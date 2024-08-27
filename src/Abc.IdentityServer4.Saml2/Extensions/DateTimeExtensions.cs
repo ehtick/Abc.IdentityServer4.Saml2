@@ -10,7 +10,7 @@
 using System;
 using System.Diagnostics;
 
-namespace Abc.IdentityServer4.Extensions
+namespace Abc.IdentityServer.Extensions
 {
     internal static class DateTimeExtensions
     {

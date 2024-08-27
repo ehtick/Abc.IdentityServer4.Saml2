@@ -4,7 +4,7 @@ using System.Collections.Specialized;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace Abc.IdentityServer4.Saml2.Validation.UnitTests
+namespace Abc.IdentityServer.Saml2.Validation.UnitTests
 {
     public class Saml2EndSessionRequestValidatorFixture
     {

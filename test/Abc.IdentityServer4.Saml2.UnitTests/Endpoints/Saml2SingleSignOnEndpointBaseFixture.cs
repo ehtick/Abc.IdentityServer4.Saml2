@@ -1,6 +1,6 @@
 ﻿using Abc.IdentityModel.Protocols.Saml2;
-using Abc.IdentityServer4.Saml2.ResponseProcessing;
-using Abc.IdentityServer4.Saml2.Validation;
+using Abc.IdentityServer.Saml2.ResponseProcessing;
+using Abc.IdentityServer.Saml2.Validation;
 using FluentAssertions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
@@ -10,7 +10,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace Abc.IdentityServer4.Saml2.Endpoints.UnitTests
+namespace Abc.IdentityServer.Saml2.Endpoints.UnitTests
 {
     public class Saml2SingleSignOnEndpointBaseFixture
     {

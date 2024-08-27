@@ -1,5 +1,6 @@
 ﻿using Abc.IdentityModel.Protocols.Saml2;
-using Abc.IdentityServer4.Saml2.Validation;
+using Abc.IdentityServer.Extensions;
+using Abc.IdentityServer.Saml2.Validation;
 using FluentAssertions;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
@@ -7,10 +8,11 @@ using Microsoft.AspNetCore.WebUtilities;
 using System;
 using System.IO;
 using System.Linq;
+using System.Security.Policy;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace Abc.IdentityServer4.Saml2.Endpoints.Results.UnitTests
+namespace Abc.IdentityServer.Saml2.Endpoints.Results.UnitTests
 {
     public class SignOutResultFixture
     {
@@ -21,6 +23,7 @@ namespace Abc.IdentityServer4.Saml2.Endpoints.Results.UnitTests
         private ValidatedSaml2Request _request;
         private MockMessageStore<LogoutMessage> _logoutMessageStore;
         private IAuthorizationParametersMessageStore _athorizationparametersMessageStore;
+        private IServerUrls _urls;
 
         public SignOutResultFixture()
         {
@@ -29,8 +32,6 @@ namespace Abc.IdentityServer4.Saml2.Endpoints.Results.UnitTests
             _options.UserInteraction.LogoutIdParameter = "logoutId";
 
             _context = new DefaultHttpContext();
-            _context.SetIdentityServerOrigin("https://server");
-            _context.SetIdentityServerBasePath("/");
             _context.Response.Body = new MemoryStream();
 
             _clock = new StubClock();
@@ -42,7 +43,13 @@ namespace Abc.IdentityServer4.Saml2.Endpoints.Results.UnitTests
 
             _athorizationparametersMessageStore = new AuthorizationParametersMessageStoreMock();
 
-            _target = new SignOutResult(_request, _options, _clock, _logoutMessageStore, _athorizationparametersMessageStore);
+            _urls = new MockServerUrls()
+            {
+                Origin = "https://server",
+                BasePath = "/".RemoveTrailingSlash(), // as in DefaultServerUrls
+            };
+
+            _target = new SignOutResult(_request, _options, _clock, _urls, _logoutMessageStore, _athorizationparametersMessageStore);
         }
 
         [Fact]
@@ -50,7 +57,7 @@ namespace Abc.IdentityServer4.Saml2.Endpoints.Results.UnitTests
         {
             Action action = () =>
             {
-                _target = new SignOutResult(null, _options, _clock, _logoutMessageStore, _athorizationparametersMessageStore);
+                _target = new SignOutResult(null, _options, _clock, _urls, _logoutMessageStore, _athorizationparametersMessageStore);
             };
 
             action.Should().Throw<ArgumentNullException>();

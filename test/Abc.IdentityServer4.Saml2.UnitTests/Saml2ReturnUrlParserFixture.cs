@@ -1,7 +1,7 @@
 ﻿using Abc.IdentityModel.Http;
 using Abc.IdentityModel.Protocols.Saml2;
-using Abc.IdentityServer4.Saml2.Endpoints.UnitTests;
-using Abc.IdentityServer4.Saml2.Validation;
+using Abc.IdentityServer.Saml2.Endpoints.UnitTests;
+using Abc.IdentityServer.Saml2.Validation;
 using FluentAssertions;
 using Microsoft.Extensions.Logging;
 using System;
@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace Abc.IdentityServer4.Saml2.UnitTests
+namespace Abc.IdentityServer.Saml2.UnitTests
 {
     public class Saml2ReturnUrlParserFixture
     {

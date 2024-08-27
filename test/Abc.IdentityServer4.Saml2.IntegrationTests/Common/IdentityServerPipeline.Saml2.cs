@@ -7,7 +7,7 @@ using System.Net.Http;
 using System.Text;
 using System.Xml;
 
-namespace Abc.IdentityServer4.Saml2.IntegrationTests.Common
+namespace Abc.IdentityServer.Saml2.IntegrationTests.Common
 {
     public partial class IdentityServerPipeline
     {

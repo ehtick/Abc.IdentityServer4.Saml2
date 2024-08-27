@@ -1,8 +1,8 @@
 ﻿using Abc.IdentityModel.Metadata;
-using Abc.IdentityServer4.Saml2.ResponseProcessing;
+using Abc.IdentityServer.Saml2.ResponseProcessing;
 using System.Threading.Tasks;
 
-namespace Abc.IdentityServer4.Saml2.Endpoints.UnitTests
+namespace Abc.IdentityServer.Saml2.Endpoints.UnitTests
 {
     internal class StubMetadataResponseGenerator : IMetadataResponseGenerator
     {

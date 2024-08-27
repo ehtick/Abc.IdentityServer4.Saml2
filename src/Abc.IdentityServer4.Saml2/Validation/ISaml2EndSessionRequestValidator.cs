@@ -10,7 +10,7 @@
 using System.Collections.Specialized;
 using System.Threading.Tasks;
 
-namespace Abc.IdentityServer4.Saml2.Validation
+namespace Abc.IdentityServer.Saml2.Validation
 {
     public interface ISaml2EndSessionRequestValidator
     {

@@ -1,5 +1,6 @@
 ﻿using Abc.IdentityModel.Protocols.Saml2;
-using Abc.IdentityServer4.Saml2.Validation;
+using Abc.IdentityServer.Extensions;
+using Abc.IdentityServer.Saml2.Validation;
 using FluentAssertions;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
@@ -7,10 +8,11 @@ using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Linq;
+using System.Security.Policy;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace Abc.IdentityServer4.Saml2.Endpoints.Results.UnitTests
+namespace Abc.IdentityServer.Saml2.Endpoints.Results.UnitTests
 {
     public class LoginPageResultFixture
     {
@@ -20,12 +22,11 @@ namespace Abc.IdentityServer4.Saml2.Endpoints.Results.UnitTests
         private ISystemClock _clock = new StubClock();
         private DefaultHttpContext _context;
         private AuthorizationParametersMessageStoreMock _authorizationParametersMessageStore;
+        private IServerUrls _urls;
 
         public LoginPageResultFixture()
         {
             _context = new DefaultHttpContext();
-            _context.SetIdentityServerOrigin("https://server");
-            _context.SetIdentityServerBasePath("/");
             _context.RequestServices = new ServiceCollection().BuildServiceProvider();
 
             _options = new IdentityServerOptions();
@@ -36,6 +37,12 @@ namespace Abc.IdentityServer4.Saml2.Endpoints.Results.UnitTests
 
             _request = new ValidatedSaml2Request();
             _request.Saml2RequestMessage = new HttpSaml2RequestMessage2(new Uri("https://server"), "some_request", IdentityModel.Http.HttpDeliveryMethods.PostRequest);
+
+            _urls = new MockServerUrls()
+            {
+                Origin = "https://server",
+                BasePath = "/".RemoveTrailingSlash(), // as in DefaultServerUrls
+            };
         }
 
         [Fact]
@@ -43,7 +50,7 @@ namespace Abc.IdentityServer4.Saml2.Endpoints.Results.UnitTests
         {
             Action action = () =>
             {
-                _target = new LoginPageResult(null, _options, _clock, _authorizationParametersMessageStore);
+                _target = new LoginPageResult(null, _options, _clock, _urls, _authorizationParametersMessageStore);
             };
 
             action.Should().Throw<ArgumentNullException>();
@@ -52,7 +59,7 @@ namespace Abc.IdentityServer4.Saml2.Endpoints.Results.UnitTests
         [Fact]
         public async Task login_should_redirect_to_login_page_and_passs_info()
         {
-            _target = new LoginPageResult(_request, _options, _clock, _authorizationParametersMessageStore);
+            _target = new LoginPageResult(_request, _options, _clock, _urls, _authorizationParametersMessageStore);
 
             await _target.ExecuteAsync(_context);
 

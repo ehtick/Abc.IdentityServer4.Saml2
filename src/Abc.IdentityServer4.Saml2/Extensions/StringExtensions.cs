@@ -12,7 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 
-namespace IdentityServer4.Extensions
+namespace Abc.IdentityServer.Extensions
 {
     internal static class StringExtensions
     {
@@ -122,6 +122,17 @@ namespace IdentityServer4.Extensions
             if (url != null && url.StartsWith("/"))
             {
                 url = url.Substring(1);
+            }
+
+            return url;
+        }
+
+        [DebuggerStepThrough]
+        public static string RemoveTrailingSlash(this string url)
+        {
+            if (url != null && url.EndsWith('/'))
+            {
+                url = url.Substring(0, url.Length - 1);
             }
 
             return url;

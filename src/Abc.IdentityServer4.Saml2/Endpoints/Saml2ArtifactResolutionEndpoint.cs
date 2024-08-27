@@ -9,8 +9,8 @@
 
 using Abc.IdentityModel.Protocols;
 using Abc.IdentityModel.Protocols.Saml2;
-using Abc.IdentityServer4.Saml2.Stores;
-using IdentityServer4.Services;
+using Abc.IdentityServer.Extensions;
+using Abc.IdentityServer.Saml2.Stores;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.Extensions.Logging;
@@ -22,24 +22,24 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 
-namespace Abc.IdentityServer4.Saml2.Endpoints
+namespace Abc.IdentityServer.Saml2.Endpoints
 {
     internal class Saml2ArtifactResolutionEndpoint : IEndpointHandler
     {
         private readonly Saml2ProtocolSerializer _samlProtocolSerializer = new Saml2ProtocolSerializer();
         private readonly Stores.IArtifactStore _artifactStore;
-        private readonly IHttpContextAccessor _contextAccessor;
+        private readonly IIssuerNameService _issuerNameService;
         private readonly IKeyMaterialService _keys;
         private readonly ILogger _logger;
 
         public Saml2ArtifactResolutionEndpoint(
-            IArtifactStore artifactStore, 
-            IHttpContextAccessor contextAccessor, 
+            IArtifactStore artifactStore,
+            IIssuerNameService issuerNameService,
             IKeyMaterialService keys,
             ILogger<Saml2ArtifactResolutionEndpoint> logger)
         {
             _artifactStore = artifactStore;
-            _contextAccessor = contextAccessor;
+            _issuerNameService = issuerNameService;
             _keys = keys;
             _logger = logger;
         }
@@ -90,7 +90,7 @@ namespace Abc.IdentityServer4.Saml2.Endpoints
                 // TODO: throw new SamlArtifactResolutionServiceException("ArtifactResolve message must be signed. ArtifactResolve issuer: '{0}'."); // TODO:
             }
 
-            var issuer = _contextAccessor.HttpContext.GetIdentityServerIssuerUri();
+            var issuer = await _issuerNameService.GetCurrentAsync();
 
             var artifactResponse = new Saml2ArtifactResponse(new Saml2Status(Saml2StatusCode.Success))
             {

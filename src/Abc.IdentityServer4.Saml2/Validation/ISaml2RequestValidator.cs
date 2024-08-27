@@ -11,7 +11,7 @@ using Abc.IdentityModel.Protocols.Saml2;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
-namespace Abc.IdentityServer4.Saml2.Validation
+namespace Abc.IdentityServer.Saml2.Validation
 {
     public interface ISaml2RequestValidator
     {

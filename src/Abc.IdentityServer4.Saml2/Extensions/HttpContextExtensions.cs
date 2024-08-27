@@ -7,14 +7,14 @@
 // </copyright>
 // ----------------------------------------------------------------------------
 
-using Abc.IdentityServer4.Saml2;
+using Abc.IdentityServer.Saml2;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace IdentityServer4.Extensions
+namespace Abc.IdentityServer.Extensions
 {
     internal static class HttpContextExtensions
     {
@@ -71,12 +71,13 @@ namespace IdentityServer4.Extensions
             if (endSessionMsg != null)
             {
                 var clock = context.RequestServices.GetRequiredService<ISystemClock>();
+                var urls = context.RequestServices.GetRequiredService<IServerUrls>();
                 var msg = new Message<LogoutNotificationContext>(endSessionMsg, clock.UtcNow.UtcDateTime);
 
                 var endSessionMessageStore = context.RequestServices.GetRequiredService<IMessageStore<LogoutNotificationContext>>();
                 var id = await endSessionMessageStore.WriteAsync(msg);
 
-                var signoutIframeUrl = context.GetIdentityServerBaseUrl().EnsureTrailingSlash() + Constants.ProtocolRoutePaths.EndSessionCallback;
+                var signoutIframeUrl = urls.BaseUrl.EnsureTrailingSlash() + Constants.ProtocolRoutePaths.EndSessionCallback;
                 signoutIframeUrl = signoutIframeUrl.AddQueryString(Constants.DefaultRoutePathParams.EndSessionCallback, id);
 
                 return signoutIframeUrl;

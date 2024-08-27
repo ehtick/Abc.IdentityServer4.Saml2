@@ -3,7 +3,7 @@
 
 using System.Net.Http;
 
-namespace Abc.IdentityServer4.Saml2.IntegrationTests.Common
+namespace Abc.IdentityServer.Saml2.IntegrationTests.Common
 {
     public class BrowserClient : HttpClient
     {

@@ -18,7 +18,7 @@ using System.Security.Claims;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Abc.IdentityServer4.Saml2.IntegrationTests.Common
+namespace Abc.IdentityServer.Saml2.IntegrationTests.Common
 {
     public partial class IdentityServerPipeline
     {

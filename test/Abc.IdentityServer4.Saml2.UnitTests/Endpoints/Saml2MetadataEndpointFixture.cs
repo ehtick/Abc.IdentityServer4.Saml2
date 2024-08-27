@@ -1,10 +1,10 @@
-﻿using Abc.IdentityServer4.Saml2.ResponseProcessing;
+﻿using Abc.IdentityServer.Saml2.ResponseProcessing;
 using FluentAssertions;
 using Microsoft.AspNetCore.Http;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace Abc.IdentityServer4.Saml2.Endpoints.UnitTests
+namespace Abc.IdentityServer.Saml2.Endpoints.UnitTests
 {
     public class Saml2MetadataEndpointFixture
     {
@@ -15,8 +15,6 @@ namespace Abc.IdentityServer4.Saml2.Endpoints.UnitTests
         public Saml2MetadataEndpointFixture()
         {
             _context = new DefaultHttpContext();
-            _context.SetIdentityServerOrigin("https://server");
-            _context.SetIdentityServerBasePath("/");
 
             _target = new Saml2MetadataEndpoint(
                 _stubMetadataGenerator,

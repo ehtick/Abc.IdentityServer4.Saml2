@@ -1,4 +1,4 @@
-﻿using Abc.IdentityServer4.Saml2.IntegrationTests.Common;
+﻿using Abc.IdentityServer.Saml2.IntegrationTests.Common;
 using FluentAssertions;
 using Microsoft.AspNetCore.WebUtilities;
 using System.Collections.Generic;
@@ -9,7 +9,7 @@ using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace Abc.IdentityServer4.Saml2.Endpoints.IntegrationTests
+namespace Abc.IdentityServer.Saml2.Endpoints.IntegrationTests
 {
     public class Saml2SingleLogOutFixture {
         private const string Category = "SAML2 single sign-on endpoint";

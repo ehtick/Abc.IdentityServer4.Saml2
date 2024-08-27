@@ -1,5 +1,5 @@
 ﻿using Abc.IdentityModel.Protocols.Saml2;
-using Abc.IdentityServer4.Saml2.Validation;
+using Abc.IdentityServer.Saml2.Validation;
 using FluentAssertions;
 using IdentityModel;
 using Microsoft.AspNetCore.Authentication;
@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace Abc.IdentityServer4.Saml2.ResponseProcessing.UnitTests
+namespace Abc.IdentityServer.Saml2.ResponseProcessing.UnitTests
 {
     public class SignInInteractionResponseGeneratorFixture
     {

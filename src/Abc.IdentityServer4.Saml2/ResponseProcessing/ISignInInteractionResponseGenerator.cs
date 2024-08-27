@@ -7,10 +7,10 @@
 // </copyright>
 // ----------------------------------------------------------------------------
 
-using Abc.IdentityServer4.Saml2.Validation;
+using Abc.IdentityServer.Saml2.Validation;
 using System.Threading.Tasks;
 
-namespace Abc.IdentityServer4.Saml2.ResponseProcessing
+namespace Abc.IdentityServer.Saml2.ResponseProcessing
 {
     /// <summary>
     /// Interface for determining if user must login or consent when making requests to the SAML2 single sign in endpoint.

@@ -7,7 +7,7 @@
 // </copyright>
 // ----------------------------------------------------------------------------
 
-using Abc.IdentityServer4.Saml2;
+using Abc.IdentityServer.Saml2;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;

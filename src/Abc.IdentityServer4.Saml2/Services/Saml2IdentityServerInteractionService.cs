@@ -7,12 +7,12 @@
 // </copyright>
 // ----------------------------------------------------------------------------
 
-using IdentityServer4.Extensions;
+using Abc.IdentityServer.Extensions;
 using Microsoft.AspNetCore.Http;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Abc.IdentityServer4.Saml2.Services
+namespace Abc.IdentityServer.Saml2.Services
 {
     internal class Saml2IdentityServerInteractionService : IIdentityServerInteractionService
     {

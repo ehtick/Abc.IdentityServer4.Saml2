@@ -8,21 +8,21 @@
 // ----------------------------------------------------------------------------
 
 using Abc.IdentityModel.Protocols.Saml2;
-using Abc.IdentityServer4.Saml2.Validation;
+using Abc.IdentityServer.Saml2.Validation;
 using IdentityModel;
-using IdentityServer4.Extensions;
+using Abc.IdentityServer.Extensions;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Abc.IdentityServer4.Saml2.ResponseProcessing
+namespace Abc.IdentityServer.Saml2.ResponseProcessing
 {
     /// <summary>
     /// Default logic for determining if user must login or consent when making requests to the SAML2 single sign on endpoint.
     /// </summary>
-    /// <seealso cref="Abc.IdentityServer4.Saml2.ResponseProcessing.ISignInInteractionResponseGenerator" />
+    /// <seealso cref="Abc.IdentityServer.Saml2.ResponseProcessing.ISignInInteractionResponseGenerator" />
     public class SignInInteractionResponseGenerator : ISignInInteractionResponseGenerator
     {
         /// <summary>

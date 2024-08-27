@@ -8,8 +8,8 @@
 // ----------------------------------------------------------------------------
 
 using Abc.IdentityModel.Protocols.Saml2;
-using Abc.IdentityServer4.Saml2.Validation;
-using IdentityServer4.Extensions;
+using Abc.IdentityServer.Saml2.Validation;
+using Abc.IdentityServer.Extensions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.DependencyInjection;
@@ -20,7 +20,7 @@ using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 
-namespace Abc.IdentityServer4.Saml2.Endpoints.Results
+namespace Abc.IdentityServer.Saml2.Endpoints.Results
 {
     internal class EndSessionCallbackResult : IEndpointResult
     {

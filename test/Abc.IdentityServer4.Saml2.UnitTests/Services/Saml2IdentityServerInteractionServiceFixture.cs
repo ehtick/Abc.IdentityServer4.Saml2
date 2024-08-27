@@ -4,7 +4,7 @@ using System;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace Abc.IdentityServer4.Saml2.Services.UnitTests
+namespace Abc.IdentityServer.Saml2.Services.UnitTests
 {
     public class Saml2IdentityServerInteractionServiceFixture
     {
@@ -16,10 +16,15 @@ namespace Abc.IdentityServer4.Saml2.Services.UnitTests
         private MockMessageStore<LogoutMessage> _mockLogoutMessageStore = new MockMessageStore<LogoutMessage>();
         private MockUserSession _mockUserSession = new MockUserSession();
         private IIdentityServerInteractionService _identityServerIteraction = new StubIdentityServerInteractionService();
+        private MockServerUrls _mockServerUrls = new MockServerUrls()
+        {
+            Origin = "https://server",
+            BasePath = "/",
+        };
 
         public Saml2IdentityServerInteractionServiceFixture()
         {
-            _mockHttpContextAccessor = new MockHttpContextAccessor(_options, _mockUserSession, _mockEndSessionStore);
+            _mockHttpContextAccessor = new MockHttpContextAccessor(_options, _mockUserSession, _mockEndSessionStore, _mockServerUrls);
 
             _target = new Saml2IdentityServerInteractionService(_identityServerIteraction, _mockHttpContextAccessor, _mockLogoutMessageStore);
         }

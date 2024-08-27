@@ -8,11 +8,11 @@
 // ----------------------------------------------------------------------------
 
 using Abc.IdentityModel.Protocols.Saml2;
-using Abc.IdentityServer4.Saml2.Validation;
-using IdentityServer4.Extensions;
+using Abc.IdentityServer.Saml2.Validation;
+using Abc.IdentityServer.Extensions;
 using System.Collections.Generic;
 
-namespace Abc.IdentityServer4.Saml2.Events
+namespace Abc.IdentityServer.Saml2.Events
 {
     public class SignInTokenIssuedSuccessEvent : TokenIssuedSuccessEvent
     {

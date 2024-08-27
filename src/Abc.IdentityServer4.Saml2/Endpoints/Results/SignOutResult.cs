@@ -8,8 +8,8 @@
 // ----------------------------------------------------------------------------
 
 using Abc.IdentityModel.Protocols.Saml2;
-using Abc.IdentityServer4.Saml2.Validation;
-using IdentityServer4.Extensions;
+using Abc.IdentityServer.Saml2.Validation;
+using Abc.IdentityServer.Extensions;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,7 +17,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Abc.IdentityServer4.Saml2.Endpoints.Results
+namespace Abc.IdentityServer.Saml2.Endpoints.Results
 {
     public class SignOutResult : IEndpointResult
     {
@@ -26,18 +26,20 @@ namespace Abc.IdentityServer4.Saml2.Endpoints.Results
         private IMessageStore<LogoutMessage> _logoutMessageStore;
         private IAuthorizationParametersMessageStore _authorizationParametersMessageStore;
         private ISystemClock _clock;
+        private IServerUrls _urls;
 
         public SignOutResult(ValidatedSaml2Request validatedRequest)
         {
             _validatedRequest = validatedRequest ?? throw new System.ArgumentNullException(nameof(validatedRequest));
         }
 
-        internal SignOutResult(ValidatedSaml2Request validatedRequest, IdentityServerOptions options, ISystemClock clock, IMessageStore<LogoutMessage> logoutMessageStore, IAuthorizationParametersMessageStore authorizationParametersMessageStore) 
+        internal SignOutResult(ValidatedSaml2Request validatedRequest, IdentityServerOptions options, ISystemClock clock, IServerUrls urls, IMessageStore<LogoutMessage> logoutMessageStore, IAuthorizationParametersMessageStore authorizationParametersMessageStore) 
             : this(validatedRequest)
         {
             _options = options;
             _logoutMessageStore = logoutMessageStore;
             _clock = clock;
+            _urls = urls;
             _authorizationParametersMessageStore = authorizationParametersMessageStore;
         }
 
@@ -45,7 +47,7 @@ namespace Abc.IdentityServer4.Saml2.Endpoints.Results
         {
             Init(context);
 
-            var returnUrl = context.GetIdentityServerBaseUrl() + Constants.ProtocolRoutePaths.SingleLogoutServiceCallback.EnsureLeadingSlash();
+            var returnUrl = _urls.BaseUrl.EnsureTrailingSlash() + Constants.ProtocolRoutePaths.SingleLogoutServiceCallback;
             {
                 var msg = new Message<IDictionary<string, string[]>>(_validatedRequest.Saml2RequestMessage.ToDictionary(), _clock.UtcNow.UtcDateTime);
                 var requestId = await _authorizationParametersMessageStore.WriteAsync(msg);
@@ -75,7 +77,7 @@ namespace Abc.IdentityServer4.Saml2.Endpoints.Results
                 redirectUrl = redirectUrl.AddQueryString(_options.UserInteraction.LogoutIdParameter, id);
             }
 
-            context.Response.RedirectToAbsoluteUrl(redirectUrl);
+            context.Response.Redirect(_urls.GetAbsoluteUrl(redirectUrl));
         }
 
         private void Init(HttpContext context)
@@ -83,6 +85,7 @@ namespace Abc.IdentityServer4.Saml2.Endpoints.Results
             _options ??= context.RequestServices.GetRequiredService<IdentityServerOptions>();
             _logoutMessageStore ??= context.RequestServices.GetRequiredService<IMessageStore<LogoutMessage>>();
             _authorizationParametersMessageStore ??= context.RequestServices.GetRequiredService<IAuthorizationParametersMessageStore>();
+            _urls ??= context.RequestServices.GetRequiredService<IServerUrls>();
             _clock ??= context.RequestServices.GetRequiredService<ISystemClock>();
         }
     }

@@ -7,7 +7,7 @@ using System.Xml.Linq;
 using System.Xml;
 using System.Xml.XPath;
 
-namespace Abc.IdentityServer4.Saml2.IntegrationTests.Common
+namespace Abc.IdentityServer.Saml2.IntegrationTests.Common
 {
     public class Saml2LoginResponse
     {

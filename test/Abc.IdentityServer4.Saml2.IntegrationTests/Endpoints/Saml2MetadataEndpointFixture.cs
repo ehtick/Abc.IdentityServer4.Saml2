@@ -1,11 +1,11 @@
-﻿using Abc.IdentityServer4.Saml2.IntegrationTests.Common;
+﻿using Abc.IdentityServer.Saml2.IntegrationTests.Common;
 using FluentAssertions;
 using Microsoft.IdentityModel.Tokens;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using Xunit;
 
-namespace Abc.IdentityServer4.Saml2.Endpoints.IntegrationTests
+namespace Abc.IdentityServer.Saml2.Endpoints.IntegrationTests
 {
     public class Saml2MetadataEndpointFixture
     {

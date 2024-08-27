@@ -7,9 +7,9 @@
 // </copyright>
 // ----------------------------------------------------------------------------
 
-using Abc.IdentityServer4.Saml2.Validation;
+using Abc.IdentityServer.Saml2.Validation;
 
-namespace Abc.IdentityServer4.Saml2.Events
+namespace Abc.IdentityServer.Saml2.Events
 {
     public class SignInTokenIssuedFailureEvent : TokenIssuedFailureEvent
     {

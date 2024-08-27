@@ -1,10 +1,10 @@
-﻿using Abc.IdentityServer4.Saml2.Endpoints.Results;
+﻿using Abc.IdentityServer.Saml2.Endpoints.Results;
 using FluentAssertions;
 using Microsoft.AspNetCore.Http;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace Abc.IdentityServer4.Saml2.Endpoints.UnitTests
+namespace Abc.IdentityServer.Saml2.Endpoints.UnitTests
 {
     public class Saml2EndSessionCallbackEndpointFixture
     {
@@ -15,8 +15,6 @@ namespace Abc.IdentityServer4.Saml2.Endpoints.UnitTests
         public Saml2EndSessionCallbackEndpointFixture()
         {
             _context = new DefaultHttpContext();
-            _context.SetIdentityServerOrigin("https://server");
-            _context.SetIdentityServerBasePath("/");
             _context.Request.Method = "GET";
 
             _subject = new Saml2EndSessionCallbackEndpoint(

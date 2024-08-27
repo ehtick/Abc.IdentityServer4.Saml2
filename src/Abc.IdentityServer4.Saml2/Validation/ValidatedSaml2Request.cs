@@ -10,7 +10,7 @@
 using Abc.IdentityModel.Protocols.Saml2;
 using System.Collections.Generic;
 
-namespace Abc.IdentityServer4.Saml2.Validation
+namespace Abc.IdentityServer.Saml2.Validation
 {
     public class ValidatedSaml2Request : Ids.Validation.ValidatedRequest
     {

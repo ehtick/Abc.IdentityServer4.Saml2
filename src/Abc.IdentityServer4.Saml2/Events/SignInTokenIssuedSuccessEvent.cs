@@ -8,8 +8,8 @@
 // ----------------------------------------------------------------------------
 
 using Abc.IdentityModel.Protocols.Saml2;
-using Abc.IdentityServer.Saml2.Validation;
 using Abc.IdentityServer.Extensions;
+using Abc.IdentityServer.Saml2.Validation;
 using System.Collections.Generic;
 
 namespace Abc.IdentityServer.Saml2.Events

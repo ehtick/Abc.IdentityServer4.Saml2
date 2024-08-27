@@ -19,7 +19,7 @@ namespace Abc.IdentityServer.Saml2.Endpoints.Results.UnitTests
         private SignOutResult _target;
         private IdentityServerOptions _options;
         private DefaultHttpContext _context;
-        private ISystemClock _clock;
+        private IClock _clock;
         private ValidatedSaml2Request _request;
         private MockMessageStore<LogoutMessage> _logoutMessageStore;
         private IAuthorizationParametersMessageStore _athorizationparametersMessageStore;

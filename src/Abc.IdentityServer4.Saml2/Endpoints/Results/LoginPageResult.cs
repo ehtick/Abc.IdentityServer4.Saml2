@@ -8,9 +8,8 @@
 // ----------------------------------------------------------------------------
 
 using Abc.IdentityModel.Protocols.Saml2;
-using Abc.IdentityServer.Saml2.Validation;
 using Abc.IdentityServer.Extensions;
-using Microsoft.AspNetCore.Authentication;
+using Abc.IdentityServer.Saml2.Validation;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -28,7 +27,7 @@ namespace Abc.IdentityServer.Saml2.Endpoints.Results
         private readonly ValidatedSaml2Request _request;
         private IdentityServerOptions _options;
         private IAuthorizationParametersMessageStore _authorizationParametersMessageStore;
-        private ISystemClock _clock;
+        private IClock _clock;
         private IServerUrls _urls;
 
         /// <summary>
@@ -41,7 +40,7 @@ namespace Abc.IdentityServer.Saml2.Endpoints.Results
             _request = request ?? throw new ArgumentNullException(nameof(request));
         }
 
-        internal LoginPageResult(ValidatedSaml2Request request, IdentityServerOptions options, ISystemClock clock, IServerUrls urls, IAuthorizationParametersMessageStore authorizationParametersMessageStore)
+        internal LoginPageResult(ValidatedSaml2Request request, IdentityServerOptions options, IClock clock, IServerUrls urls, IAuthorizationParametersMessageStore authorizationParametersMessageStore)
             : this(request)
         {
             _options = options;
@@ -78,7 +77,7 @@ namespace Abc.IdentityServer.Saml2.Endpoints.Results
             _options ??= context.RequestServices.GetRequiredService<IdentityServerOptions>();
             _authorizationParametersMessageStore ??= context.RequestServices.GetRequiredService<IAuthorizationParametersMessageStore>();
             _urls ??= context.RequestServices.GetRequiredService<IServerUrls>();
-            _clock ??= context.RequestServices.GetRequiredService<ISystemClock>();
+            _clock ??= context.RequestServices.GetRequiredService<IClock>();
         }
     }
 }

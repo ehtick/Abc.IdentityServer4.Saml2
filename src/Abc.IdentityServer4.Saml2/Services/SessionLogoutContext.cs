@@ -157,7 +157,7 @@ namespace Abc.IdentityServer4.Saml2.Services
 
     public class Saml2UserSession : DefaultUserSession, ISaml2UserSession
     {
-        public Saml2UserSession(IHttpContextAccessor httpContextAccessor, IAuthenticationHandlerProvider handlers, IdentityServerOptions options, ISystemClock clock, ILogger<IUserSession> logger) 
+        public Saml2UserSession(IHttpContextAccessor httpContextAccessor, IAuthenticationHandlerProvider handlers, IdentityServerOptions options, IClock clock, ILogger<IUserSession> logger) 
             : base(httpContextAccessor, handlers, options, clock, logger)
         {
         }

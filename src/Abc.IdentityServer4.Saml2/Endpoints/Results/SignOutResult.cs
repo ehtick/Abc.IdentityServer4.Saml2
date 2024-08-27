@@ -8,9 +8,8 @@
 // ----------------------------------------------------------------------------
 
 using Abc.IdentityModel.Protocols.Saml2;
-using Abc.IdentityServer.Saml2.Validation;
 using Abc.IdentityServer.Extensions;
-using Microsoft.AspNetCore.Authentication;
+using Abc.IdentityServer.Saml2.Validation;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using System.Collections.Generic;
@@ -25,7 +24,7 @@ namespace Abc.IdentityServer.Saml2.Endpoints.Results
         private IdentityServerOptions _options;
         private IMessageStore<LogoutMessage> _logoutMessageStore;
         private IAuthorizationParametersMessageStore _authorizationParametersMessageStore;
-        private ISystemClock _clock;
+        private IClock _clock;
         private IServerUrls _urls;
 
         public SignOutResult(ValidatedSaml2Request validatedRequest)
@@ -33,7 +32,7 @@ namespace Abc.IdentityServer.Saml2.Endpoints.Results
             _validatedRequest = validatedRequest ?? throw new System.ArgumentNullException(nameof(validatedRequest));
         }
 
-        internal SignOutResult(ValidatedSaml2Request validatedRequest, IdentityServerOptions options, ISystemClock clock, IServerUrls urls, IMessageStore<LogoutMessage> logoutMessageStore, IAuthorizationParametersMessageStore authorizationParametersMessageStore) 
+        internal SignOutResult(ValidatedSaml2Request validatedRequest, IdentityServerOptions options, IClock clock, IServerUrls urls, IMessageStore<LogoutMessage> logoutMessageStore, IAuthorizationParametersMessageStore authorizationParametersMessageStore) 
             : this(validatedRequest)
         {
             _options = options;
@@ -86,7 +85,7 @@ namespace Abc.IdentityServer.Saml2.Endpoints.Results
             _logoutMessageStore ??= context.RequestServices.GetRequiredService<IMessageStore<LogoutMessage>>();
             _authorizationParametersMessageStore ??= context.RequestServices.GetRequiredService<IAuthorizationParametersMessageStore>();
             _urls ??= context.RequestServices.GetRequiredService<IServerUrls>();
-            _clock ??= context.RequestServices.GetRequiredService<ISystemClock>();
+            _clock ??= context.RequestServices.GetRequiredService<IClock>();
         }
     }
 }

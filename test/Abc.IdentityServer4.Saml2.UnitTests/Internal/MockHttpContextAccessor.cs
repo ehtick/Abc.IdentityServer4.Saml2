@@ -29,6 +29,10 @@ namespace Microsoft.AspNetCore.Http
                 auth.DefaultAuthenticateScheme = Schemes.Default;
             });
 
+#if NET8_0_OR_GREATER
+            services.AddTransient<IClock, Abc.IdentityServer.Extensions.StubClock>();
+#endif
+
             if (userSession == null)
             {
                 services.AddScoped<IUserSession, DefaultUserSession>();

@@ -11,7 +11,6 @@ using Abc.IdentityModel.Http;
 using Abc.IdentityModel.Protocols.Saml2;
 using Abc.IdentityServer.Extensions;
 using Abc.IdentityServer.Saml2.Validation;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.IdentityModel.Tokens.Saml2;
@@ -26,14 +25,14 @@ namespace Abc.IdentityServer.Saml2.ResponseProcessing
         private readonly Saml2SPOptions _options;
         private readonly IIssuerNameService _issuerNameService;
         private readonly IKeyMaterialService _keys;
-        private readonly ISystemClock _clock;
+        private readonly IClock _clock;
 
         public LogoutRequestGenerator(
             ILogger<LogoutResponseGenerator> logger,
             Saml2SPOptions options,
             IIssuerNameService issuerNameService,
             IKeyMaterialService keys,
-            ISystemClock clock)
+            IClock clock)
         {
             _logger = logger;
             _options = options;

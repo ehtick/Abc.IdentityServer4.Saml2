@@ -8,9 +8,9 @@
 // ----------------------------------------------------------------------------
 
 using Abc.IdentityModel.Protocols.Saml2;
+using Abc.IdentityServer.Extensions;
 using Abc.IdentityServer.Saml2.Validation;
 using IdentityModel;
-using Abc.IdentityServer.Extensions;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.Extensions.Logging;
 using System;
@@ -30,7 +30,7 @@ namespace Abc.IdentityServer.Saml2.ResponseProcessing
         /// </summary>
         /// <param name="clock">The clock.</param>
         /// <param name="logger">The logger.</param>
-        public SignInInteractionResponseGenerator(ISystemClock clock, ILogger<SignInInteractionResponseGenerator> logger)
+        public SignInInteractionResponseGenerator(IClock clock, ILogger<SignInInteractionResponseGenerator> logger)
         {
             Clock = clock;
             Logger = logger;
@@ -44,7 +44,7 @@ namespace Abc.IdentityServer.Saml2.ResponseProcessing
         /// <summary>
         /// Gets the clock.
         /// </summary>
-        protected ISystemClock Clock { get; }
+        protected IClock Clock { get; }
 
         /// <inheritdoc/>
         public virtual async Task<InteractionResponse> ProcessInteractionAsync(ValidatedSaml2Request request, ConsentResponse consent = null)

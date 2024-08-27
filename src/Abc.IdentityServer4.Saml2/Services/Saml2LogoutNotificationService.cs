@@ -9,10 +9,10 @@
 
 using Abc.IdentityModel.Http;
 using Abc.IdentityModel.Protocols.Saml2;
+using Abc.IdentityServer.Extensions;
 using Abc.IdentityServer.Saml2.ResponseProcessing;
 using Abc.IdentityServer.Saml2.Stores;
 using Abc.IdentityServer.Saml2.Validation;
-using Abc.IdentityServer.Extensions;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Linq;

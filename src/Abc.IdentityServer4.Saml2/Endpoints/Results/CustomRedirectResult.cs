@@ -24,7 +24,7 @@ namespace Abc.IdentityServer.Saml2.Endpoints.Results
         private readonly ValidatedSaml2Request _request;
         private readonly string _url;
         private IdentityServerOptions _options;
-        private ISystemClock _clock;
+        private IClock _clock;
         private IServerUrls _urls;
         private IAuthorizationParametersMessageStore _authorizationParametersMessageStore;
 
@@ -44,7 +44,7 @@ namespace Abc.IdentityServer.Saml2.Endpoints.Results
             _url = url;
         }
 
-        internal CustomRedirectResult(ValidatedSaml2Request request, string url, IdentityServerOptions options, ISystemClock clock, IServerUrls urls, IAuthorizationParametersMessageStore authorizationParametersMessageStore = null)
+        internal CustomRedirectResult(ValidatedSaml2Request request, string url, IdentityServerOptions options, IClock clock, IServerUrls urls, IAuthorizationParametersMessageStore authorizationParametersMessageStore = null)
             : this(request, url)
         {
             _options = options;
@@ -79,7 +79,7 @@ namespace Abc.IdentityServer.Saml2.Endpoints.Results
             _options ??= context.RequestServices.GetRequiredService<IdentityServerOptions>();
             _authorizationParametersMessageStore ??= context.RequestServices.GetRequiredService<IAuthorizationParametersMessageStore>();
             _urls ??= context.RequestServices.GetRequiredService<IServerUrls>();
-            _clock ??= context.RequestServices.GetRequiredService<ISystemClock>();
+            _clock ??= context.RequestServices.GetRequiredService<IClock>();
         }
     }
 }

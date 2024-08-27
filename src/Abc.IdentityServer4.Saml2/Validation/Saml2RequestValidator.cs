@@ -10,7 +10,6 @@
 using Abc.IdentityModel.Protocols.Saml2;
 using Abc.IdentityServer.Extensions;
 using Abc.IdentityServer.Saml2.Stores;
-using Abc.IdentityServer.Extensions;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.Extensions.Logging;
 using System.Linq;
@@ -27,7 +26,7 @@ namespace Abc.IdentityServer.Saml2.Validation
         private readonly IUserSession _userSession;
         private readonly Ids.Validation.IRedirectUriValidator _uriValidator;
         private readonly IdentityServerOptions _options;
-        private readonly ISystemClock _clock;
+        private readonly IClock _clock;
         private readonly IRelyingPartyStore _relyingParties;
 
         public Saml2RequestValidator(
@@ -36,7 +35,7 @@ namespace Abc.IdentityServer.Saml2.Validation
             IUserSession userSession,
             Ids.Validation.IRedirectUriValidator uriValidator,
             IdentityServerOptions options,
-            ISystemClock clock,
+            IClock clock,
             IRelyingPartyStore relyingParties)
         {
             _logger = logger;

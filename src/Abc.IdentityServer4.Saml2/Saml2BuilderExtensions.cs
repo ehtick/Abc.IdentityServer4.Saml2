@@ -7,13 +7,13 @@
 // </copyright>
 // ----------------------------------------------------------------------------
 
+using Abc.IdentityServer.Extensions;
 using Abc.IdentityServer.Saml2;
 using Abc.IdentityServer.Saml2.Endpoints;
 using Abc.IdentityServer.Saml2.ResponseProcessing;
 using Abc.IdentityServer.Saml2.Services;
 using Abc.IdentityServer.Saml2.Stores;
 using Abc.IdentityServer.Saml2.Validation;
-using Abc.IdentityServer.Extensions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Options;

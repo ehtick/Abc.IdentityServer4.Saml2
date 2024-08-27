@@ -19,7 +19,7 @@ namespace Abc.IdentityServer.Saml2.Endpoints.Results
     {
         private IMessageStore<ErrorMessage> _errorMessageStore;
         private IdentityServerOptions _options;
-        private ISystemClock _clock;
+        private IClock _clock;
         private IServerUrls _urls;
 
         public ErrorPageResult(string error, string errorDescription)
@@ -28,7 +28,7 @@ namespace Abc.IdentityServer.Saml2.Endpoints.Results
             ErrorDescription = errorDescription;
         }
 
-        internal ErrorPageResult(string error, string errorDescription, IdentityServerOptions options, ISystemClock clock, IServerUrls urls, IMessageStore<ErrorMessage> errorMessageStore)
+        internal ErrorPageResult(string error, string errorDescription, IdentityServerOptions options, IClock clock, IServerUrls urls, IMessageStore<ErrorMessage> errorMessageStore)
             : this(error, errorDescription)
         {
             _options = options;
@@ -66,7 +66,7 @@ namespace Abc.IdentityServer.Saml2.Endpoints.Results
             _errorMessageStore ??= context.RequestServices.GetRequiredService<IMessageStore<ErrorMessage>>();
             _options ??= context.RequestServices.GetRequiredService<IdentityServerOptions>();
             _urls ??= context.RequestServices.GetRequiredService<IServerUrls>();
-            _clock ??= context.RequestServices.GetRequiredService<ISystemClock>();
+            _clock ??= context.RequestServices.GetRequiredService<IClock>();
         }
     }
 }

@@ -1,12 +1,12 @@
-﻿using Abc.IdentityServer.Saml2.Stores;
-using Microsoft.AspNetCore.Authentication;
+﻿using Abc.IdentityServer.Extensions;
+using Abc.IdentityServer.Saml2.Stores;
 
 namespace Abc.IdentityServer.Saml2.Validation.UnitTests
 {
     public abstract class Saml2RequestValidatorBase
     {
         protected readonly Saml2RequestValidator validator;
-        protected readonly ISystemClock clock;
+        protected readonly IClock clock;
 
         public Saml2RequestValidatorBase()
         {

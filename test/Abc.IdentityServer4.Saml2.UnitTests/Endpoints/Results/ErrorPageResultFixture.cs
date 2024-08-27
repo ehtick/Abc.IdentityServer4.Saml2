@@ -1,6 +1,5 @@
 ﻿using Abc.IdentityServer.Extensions;
 using FluentAssertions;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.WebUtilities;
 using System;
@@ -16,7 +15,7 @@ namespace Abc.IdentityServer.Saml2.Endpoints.Results.UnitTests
         private ErrorPageResult _target;
         private IdentityServerOptions _options;
         private MockMessageStore<ErrorMessage> _errorMessageStore;
-        private ISystemClock _clock = new StubClock();
+        private IClock _clock = new StubClock();
         private DefaultHttpContext _context;
         private IServerUrls _urls;
 

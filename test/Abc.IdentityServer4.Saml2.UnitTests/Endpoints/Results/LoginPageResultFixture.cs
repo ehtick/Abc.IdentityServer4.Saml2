@@ -2,7 +2,6 @@
 using Abc.IdentityServer.Extensions;
 using Abc.IdentityServer.Saml2.Validation;
 using FluentAssertions;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.DependencyInjection;
@@ -19,7 +18,7 @@ namespace Abc.IdentityServer.Saml2.Endpoints.Results.UnitTests
         private LoginPageResult _target;
         private ValidatedSaml2Request _request;
         private IdentityServerOptions _options;
-        private ISystemClock _clock = new StubClock();
+        private IClock _clock = new StubClock();
         private DefaultHttpContext _context;
         private AuthorizationParametersMessageStoreMock _authorizationParametersMessageStore;
         private IServerUrls _urls;

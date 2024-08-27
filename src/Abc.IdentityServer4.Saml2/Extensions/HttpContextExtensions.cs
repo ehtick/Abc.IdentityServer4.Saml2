@@ -70,7 +70,7 @@ namespace Abc.IdentityServer.Extensions
 
             if (endSessionMsg != null)
             {
-                var clock = context.RequestServices.GetRequiredService<ISystemClock>();
+                var clock = context.RequestServices.GetRequiredService<IClock>();
                 var urls = context.RequestServices.GetRequiredService<IServerUrls>();
                 var msg = new Message<LogoutNotificationContext>(endSessionMsg, clock.UtcNow.UtcDateTime);
 

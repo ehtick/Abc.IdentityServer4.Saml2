@@ -36,8 +36,12 @@ namespace Abc.IdentityServer.Saml2.Logging
         {
             var options = new JsonSerializerOptions
             {
+#if NET6_0_OR_GREATER
+                DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
+#else
                 IgnoreNullValues = true,
-                WriteIndented = true
+#endif
+                WriteIndented = true,
             };
 
             options.Converters.Add(new JsonStringEnumConverter());
